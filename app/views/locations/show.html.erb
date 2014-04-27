@@ -20,10 +20,10 @@
   <%= @location.score %>
 </p>
 
-<% if @location.afip_url.present? %>
+<% if @location.afip_req.present? %>
   <p>
-    <strong>Afip URL:</strong>
-    <%= link_to @location.afip_url, @location.afip_url %>
+    <strong>Afip req:</strong>
+    <%= link_to @location.afip_req, "https://servicios1.afip.gov.ar/clavefiscal/qr/mobilePublicInfo.aspx?req=#{@location.afip_req}", target: "_blank" %>
   </p>
 <% end %>
 
