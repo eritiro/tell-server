@@ -4,7 +4,8 @@
     "name": "Bar alemán",
     "address": "Tacuarí 995",
     "telephone": 41111111,
-    "score": 3.5
+    "score": 3.5,
+	"url": "http://afip.gob.ar/baralemanid"
   },
   "comments": [{
     "timestamp": 23452345234,
