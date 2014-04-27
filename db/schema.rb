@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427192611) do
+ActiveRecord::Schema.define(version: 20140427201415) do
 
   create_table "comments", force: true do |t|
     t.string   "text"
-    t.decimal  "score",      precision: 4, scale: 1
+    t.decimal  "score",       precision: 4, scale: 1
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "location_id"
   end
 
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
