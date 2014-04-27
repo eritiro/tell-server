@@ -1,0 +1,24 @@
+{
+  version: 0.1,
+  store: {
+    name: "Bar alemán",
+    address: "Tacuarí 995",
+    telephone: 41111111,
+    score: 3.5
+  },
+  comments: [{
+    timestamp: 23452345234,
+    text: "Hay que ir temprano porque se llena",
+    author: {
+      name: "Diego Sisto"
+      image: "http://perfil.com/imagen.jpg"
+    }
+  }, {
+    timestamp: 23452345234,
+    text: "Hay que ir temprano porque se llena",
+    author: {
+      name: "Diego Sisto"
+      image: "http://perfil.com/imagen.jpg"
+    }
+  }]
+}
