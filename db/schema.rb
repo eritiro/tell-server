@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20140427223607) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "afip_url"
+    t.string   "afip_req"
   end
 
-  add_index "locations", ["afip_url"], name: "index_locations_on_afip_url", unique: true, using: :btree
+  add_index "locations", ["afip_req"], name: "index_locations_on_afip_req", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",                           null: false
