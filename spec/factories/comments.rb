@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :comment do
     text "MyString"
     score "9.99"
-    user nil
+    author
+    location
   end
 end

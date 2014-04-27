@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe "comments/show" do
   before(:each) do
-    @comment = assign(:comment, build(:comment,
-      :text => "Text",
-      :score => "3.5",
-      :user => nil
-    ))
+    @comment = assign(:comment, build(:comment, text: "Text", score: "3.5"))
   end
 
   it "renders attributes in <p>" do

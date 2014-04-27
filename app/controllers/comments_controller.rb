@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = @location.comments.new(comment_params)
+    @comment.author = current_user
 
     respond_to do |format|
       if @comment.save

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "comments/index" do
   before(:each) do
     assign(:location, build(:location))
-    assign(:comments, build_list(:comment, 2, :text => "a comment text", :score => "4.5", :user => nil))
+    assign(:comments, build_list(:comment, 2, text: "a comment text", score: "4.5"))
   end
 
   it "renders a list of comments" do
