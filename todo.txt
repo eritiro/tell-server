@@ -1,6 +1,5 @@
 Falta:
 ------
 
-Agregar un username
 Agregar un token a cada user y validar que funcione el token authenticable
 Deployar a produccion 
