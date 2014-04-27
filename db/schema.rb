@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20140427201415) do
 
   create_table "comments", force: true do |t|
-    t.string   "text"
+    t.text     "text"
     t.decimal  "score",       precision: 4, scale: 1
     t.integer  "user_id"
     t.datetime "created_at"
