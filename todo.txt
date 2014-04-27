@@ -1,5 +1,6 @@
 Falta:
 ------
 
+Cambiar la URL
 Agregar un token a cada user y validar que funcione el token authenticable
 Deployar a produccion 

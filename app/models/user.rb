@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   def to_s
     email
   end
+
+  def image
+    "http://www.irdrinternational.org/wp-content/uploads/2011/06/NO-IMAGE-AVAILABLE.jpg"
+  end
 end
