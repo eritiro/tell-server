@@ -11,13 +11,24 @@ describe LocationsController do
     end
 
     context "with req" do
-      before do
-        @location = create(:location, afip_req: "e1ttZXRob2Q9Z2V0UHVibGljSW5mb11bcGVyc29uYT0zMDY0MjU0MDUwMV1bdGlwb2RvbWljaWxpbz0xXVtzZWN1ZW5jaWE9MV19")
-        get :index, { req: @location.afip_req }
+      context "of an existing location" do
+        before do
+          @location = create(:location, afip_req: "e1ttZXRob2Q9Z2V0UHVibGljSW5mb11bcGVyc29uYT0zMDY0MjU0MDUwMV1bdGlwb2RvbWljaWxpbz0xXVtzZWN1ZW5jaWE9MV19")
+          get :index, { req: @location.afip_req, format: :json }
+        end
+
+        it { assigns(:location).should eq(@location) }
+        it { response.should render_template("show") }
       end
 
-      it { assigns(:location).should eq(@location) }
-      it { response.should render_template("show") }
+      context "of an unexisting location" do
+        render_views
+
+        it "returns nil" do
+           get :index, { req: "abcde", format: :json }
+           response.body.should eq nil.to_json
+        end
+      end 
     end
   end
 

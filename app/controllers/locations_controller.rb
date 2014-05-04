@@ -6,7 +6,12 @@ class LocationsController < ApplicationController
   def index
     if params[:req].present?
       @location = Location.find_by_afip_req(params[:req])
-      render action: 'show'
+
+      if @location.present?
+        render action: 'show' 
+      elsif
+        render json: nil
+      end
     else
       @locations = Location.all
     end
