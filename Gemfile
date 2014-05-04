@@ -16,6 +16,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'capistrano'
+  gem 'rvm-capistrano'
+end
+
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
