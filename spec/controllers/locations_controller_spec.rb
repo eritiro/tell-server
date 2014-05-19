@@ -22,11 +22,21 @@ describe LocationsController do
       end
 
       context "of an unexisting location" do
-        render_views
+        it "creates a location" do
+          expect{ get(:index, { req: "abcde", format: :json }) }.to change{Location.count}.by(1)
+        end
 
-        it "returns nil" do
-           get :index, { req: "abcde", format: :json }
-           response.body.should eq nil.to_json
+        context do
+          before do
+            get :index, { req: "abcde", format: :json }
+          end
+
+          it "assigns the req to afip_req" do
+            Location.last.afip_req.should == "abcde"
+          end
+
+          it { assigns(:location).should be_a(Location) }
+          it { response.should render_template("show") }
         end
       end 
     end
