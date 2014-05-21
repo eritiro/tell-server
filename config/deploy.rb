@@ -3,7 +3,7 @@ require "rvm/capistrano"  # Load RVM's capistrano plugin.
 
 set :rvm_type, :system
 set :rvm_path, "/usr/local/rvm"
-set :rvm_ruby_string, "ruby-1.9.3-p194"
+set :rvm_ruby_string, "ruby-2.1.2"
 #set :rvm_custom_path, "/usr/local/rvm/bin/"
 set :application, "tell-server"
 

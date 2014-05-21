@@ -19,6 +19,9 @@ end
 group :development do
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'guard-rspec', require: false
+  gem 'guard-spork'
+  gem 'spork-rails', :github => 'sporkrb/spork-rails'
 end
 
 group :test do

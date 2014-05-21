@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427223607) do
+ActiveRecord::Schema.define(version: 20140519030649) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140427223607) do
   end
 
   create_table "locations", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name"
     t.string   "address"
     t.string   "phone"
     t.datetime "created_at"
