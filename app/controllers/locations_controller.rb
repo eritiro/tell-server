@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
     if params[:req].present?
       @location = Location.find_by_afip_req(params[:req])
       create_location if @location.nil?
-      
+	  
       render action: 'show' 
     else
       @locations = Location.all
@@ -81,5 +81,18 @@ class LocationsController < ApplicationController
 
     def create_location 
       @location = Location.create(afip_req: params[:req])
+	  require 'open-uri' # TODO mover donde corresponda
+      require 'nokogiri' # TODO mover donde corresponda
+	  
+	  @location = Location.new
+	  unparsed = open("https://servicios1.afip.gov.ar/clavefiscal/qr/mobilePublicInfo.aspx?req=" + params[:req])
+      # TODO si unparsed no encontró nada devolver error al cliente
+	  
+	  doc = Nokogiri::HTML(unparsed)
+	  @location.name = doc.css("h3").text
+	  @location.address =  doc.css(".bandeja td")[9].text
+	  @location.afip_req = params[:req] # creo que sobra
+	  
+	  # TODO guardar en la base
     end
 end
