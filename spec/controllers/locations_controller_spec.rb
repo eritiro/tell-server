@@ -22,6 +22,10 @@ describe LocationsController do
       end
 
       context "of an unexisting location" do
+        before do
+          LocationsHelper.should_receive(:get_location).with("abcde").and_return(build(:location, afip_req: "abcde"))
+        end
+
         it "creates a location" do
           expect{ get(:index, { req: "abcde", format: :json }) }.to change{Location.count}.by(1)
         end

@@ -1,4 +1,6 @@
 class LocationsController < ApplicationController
+  include LocationsHelper
+
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
@@ -80,19 +82,7 @@ class LocationsController < ApplicationController
     end
 
     def create_location 
-      @location = Location.create(afip_req: params[:req])
-	  require 'open-uri' # TODO mover donde corresponda
-      require 'nokogiri' # TODO mover donde corresponda
-	  
-	  @location = Location.new
-	  unparsed = open("https://servicios1.afip.gov.ar/clavefiscal/qr/mobilePublicInfo.aspx?req=" + params[:req])
-      # TODO si unparsed no encontró nada devolver error al cliente
-	  
-	  doc = Nokogiri::HTML(unparsed)
-	  @location.name = doc.css("h3").text
-	  @location.address =  doc.css(".bandeja td")[9].text
-	  @location.afip_req = params[:req] # creo que sobra
-	  
-	  # TODO guardar en la base
+      @location = LocationsHelper.get_location(params[:req])
+      @location.save!
     end
 end
