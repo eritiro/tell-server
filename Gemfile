@@ -9,6 +9,7 @@ gem 'turbolinks'
 gem 'devise'
 gem 'nokogiri'
 gem 'jbuilder'
+gem 'paperclip'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -26,6 +27,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'json_spec'
 end
 
 group :production do

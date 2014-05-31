@@ -10,6 +10,18 @@ describe LocationsController do
       assigns(:locations).should eq([location])
     end
 
+
+    describe '.json' do
+      render_views
+
+      it "renders json" do
+        location = create(:location)
+        get :index, format: "json"
+        response.body.should include(location.name)
+        response.body.should include(location.address)
+      end
+    end
+
     context "with req" do
       context "of an existing location" do
         before do
@@ -42,7 +54,7 @@ describe LocationsController do
           it { assigns(:location).should be_a(Location) }
           it { response.should render_template("show") }
         end
-      end 
+      end
     end
   end
 
@@ -51,6 +63,21 @@ describe LocationsController do
       location = create(:location)
       get :show, {:id => location.to_param}
       assigns(:location).should eq(location)
+    end
+
+    describe '.json' do
+      render_views
+
+      it "renders json" do
+        location = create(:location)
+        comment = create(:comment, location: location)
+        get :show, {:id => location.to_param, format: "json"}
+        response.body.should include(location.name)
+        response.body.should include(location.address)
+        response.body.should include(comment.text)
+        response.body.should include(comment.author.username)
+        response.body.should include(comment.author.picture.url(:thumb))
+      end
     end
   end
 
