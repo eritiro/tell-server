@@ -10,6 +10,8 @@ gem 'devise'
 gem 'nokogiri'
 gem 'jbuilder'
 gem 'paperclip'
+gem 'rails-patch-json-encode'
+gem 'oj'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -27,7 +29,6 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'json_spec'
 end
 
 group :production do
