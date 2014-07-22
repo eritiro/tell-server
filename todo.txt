@@ -1,4 +1,9 @@
 Falta:
 ------
 
-Deployar a produccion 
+devolver el campo en nulo
+autenticar con facebook (devolver id)
+crear usuario solo con nombre (devolver id)
+
+posibilidad de compartir un comentario en facebook
+editar perfil

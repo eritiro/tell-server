@@ -1,16 +1,16 @@
 class LocationsController < ApplicationController
   include LocationsHelper
-
+  require 'locations_helper'
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
   # GET /locations.json
   def index
     if params[:req].present?
-      @location = Location.find_by_afip_req(params[:req])
+      @location = get_location(params[:req])
       create_location if @location.nil?
-	  
-      render action: 'show' 
+
+      render action: 'show'
     else
       @locations = Location.all
     end
@@ -81,7 +81,7 @@ class LocationsController < ApplicationController
       params.require(:location).permit(:name, :address, :phone, :afip_req)
     end
 
-    def create_location 
+    def create_location
       @location = LocationsHelper.get_location(params[:req])
       @location.save!
     end
