@@ -25,6 +25,7 @@ describe LocationsController do
     context "with req" do
       context "of an existing location" do
         before do
+          LocationCrawler.any_instance.should_not_receive(:get_location)
           @location = create(:location, afip_req: "e1ttZXRob2Q9Z2V0UHVibGljSW5mb11bcGVyc29uYT0zMDY0MjU0MDUwMV1bdGlwb2RvbWljaWxpbz0xXVtzZWN1ZW5jaWE9MV19")
           get :index, { req: @location.afip_req, format: :json }
         end
@@ -35,7 +36,7 @@ describe LocationsController do
 
       context "of an unexisting location" do
         before do
-          LocationsHelper.should_receive(:get_location).with("abcde").and_return(build(:location, afip_req: "abcde"))
+          LocationCrawler.any_instance.should_receive(:get_location).with("abcde").and_return(build(:location, afip_req: "abcde"))
         end
 
         it "creates a location" do
