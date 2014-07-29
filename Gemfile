@@ -12,6 +12,7 @@ gem 'jbuilder'
 gem 'paperclip'
 gem 'rails-patch-json-encode'
 gem 'oj'
+gem 'rack-cors', require: 'rack/cors'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
