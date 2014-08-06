@@ -38,6 +38,7 @@ module TellServer
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :put, :delete]
+        resource '*/*', :headers => :any, :methods => [:get, :post, :options, :patch, :put, :delete]
       end
     end
   end
