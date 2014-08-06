@@ -34,7 +34,7 @@ module TellServer
 
     config.autoload_paths += %W(#{config.root}/crawlers)
 
-    config.middleware.insert_before 0, Rack::Cors do
+    config.middleware.insert_before 1, Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :put, :delete]
