@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :location do
-    name "MyString"
-    address "MyString"
-    phone "MyString"
+    name "FunnyPizza"
+    address "102 Apple st."
+    phone "1-101-1011"
+    photo_file_name "location.jpeg"
   end
 end

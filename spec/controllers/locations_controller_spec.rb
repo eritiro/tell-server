@@ -75,6 +75,7 @@ describe LocationsController do
         get :show, {:id => location.to_param, format: "json"}
         response.body.should include(location.name)
         response.body.should include(location.address)
+        response.body.should include("test.com" + location.photo.url(:medium))
         response.body.should include(comment.text)
         response.body.should include(comment.author.username)
         response.body.should include(comment.author.picture.url(:thumb))

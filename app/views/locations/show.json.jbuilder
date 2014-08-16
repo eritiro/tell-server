@@ -1,4 +1,5 @@
 json.extract! @location, :id, :name, :address, :phone, :afip_req, :score
+json.photo_url absolute_url(@location.photo.url(:medium))
 json.comments @location.comments do |comment|
   json.extract! comment, :text, :score
   json.created_at comment.created_at.to_i
