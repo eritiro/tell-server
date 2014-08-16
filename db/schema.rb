@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140816193936) do
+ActiveRecord::Schema.define(version: 20140816213514) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140816193936) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
