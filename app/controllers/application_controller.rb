@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
 private
 
   def authenticate_user_from_token!
-    user_id = request.headers["user_id"]
+    user_id = request.headers["User-Id"]
     user    = user_id.present? && User.find_by_id(user_id)
 
-    if user && Devise.secure_compare(user.authentication_token, request.headers["user_token"])
+    if user && Devise.secure_compare(user.authentication_token, request.headers["User-Token"])
       sign_in user, store: false
     end
   end
