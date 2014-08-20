@@ -44,6 +44,10 @@ describe CommentsController do
         }.to change(Comment, :count).by(1)
       end
 
+      it "responds to json" do
+        post :create, {:comment => attributes_for(:comment), location_id: location.to_param, format: :json}
+      end
+
       it "assigns a newly created comment as @comment" do
         post :create, {:comment => attributes_for(:comment), location_id: location.to_param}
         assigns(:comment).should be_a(Comment)
