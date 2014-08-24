@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140816213514) do
+ActiveRecord::Schema.define(version: 20140824182121) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140816213514) do
   add_index "locations", ["afip_req"], name: "index_locations_on_afip_req", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",                           null: false
+    t.string   "username"
     t.string   "email",                              null: false
     t.string   "encrypted_password",                 null: false
     t.string   "reset_password_token"
