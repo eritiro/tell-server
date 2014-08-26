@@ -1,16 +1,13 @@
 module NavigationHelper
 
   def menu_items
-
+    return [] unless user_signed_in?
     items = Array.new
+
     add_item items, :locations
     add_item items, :users
 
     items
-  end
-
-  def menu current
-    @current_menu = current
   end
 
 private
