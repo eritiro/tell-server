@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   before_save :ensure_authentication_token
 
-  has_attached_file :picture, :styles => { :medium => "400x400>", :thumb => "100x100>" }, :default_url => "/assets/missing_:style.png"
+  has_attached_file :picture, :styles => { :medium => "400x400>", :thumb => "100x100>" }, :default_url => "/assets/user_missing_:style.png"
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   def to_s
