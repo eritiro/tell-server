@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CommentsController do
   let(:location) { create :location }
 
-  before { sign_in create(:user) }
+  before { sign_in create(:admin) }
 
   describe "GET index" do
     it "assigns all comments as @comments" do

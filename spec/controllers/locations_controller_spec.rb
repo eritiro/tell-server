@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe LocationsController do
-  before { sign_in create(:user) }
+  before { sign_in create(:admin) }
 
   describe "GET index" do
     it "assigns all locations as @locations" do

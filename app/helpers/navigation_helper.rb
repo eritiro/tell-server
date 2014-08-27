@@ -4,16 +4,19 @@ module NavigationHelper
     return [] unless user_signed_in?
     items = Array.new
 
-    add_item items, :locations
-    add_item items, :users
+    add_item items, Location
+    add_item items, User
 
     items
   end
 
 private
 
-  def add_item items, key, text = key.to_s, path = key
-    items << { text: text, path: path, current: params[:controller].include?(key.to_s) }
+  def add_item items, klass, text = klass.to_s, path = klass
+    if can? :index, klass
+      key = klass.to_s.pluralize.downcase
+      items << { text: text, path: path, current: params[:controller].include?(key.to_s) }
+    end
   end
 
 end

@@ -6,5 +6,6 @@ FactoryGirl.define do
     address "102 Apple st."
     phone "1-101-1011"
     photo_file_name "location.jpeg"
+    afip_req "asd"
   end
 end

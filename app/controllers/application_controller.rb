@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_token!
   before_filter :authenticate_user!
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
+  check_authorization :unless => :devise_controller?
+  rescue_from CanCan::AccessDenied, with: :access_denied
 private
 
   def authenticate_user_from_token!
@@ -16,6 +17,10 @@ private
     if user && Devise.secure_compare(user.authentication_token, request.headers["User-Token"])
       sign_in user, store: false
     end
+  end
+
+  def access_denied
+    render :file => "public/401.html", :status => :unauthorized, layout: nil
   end
 
   def configure_permitted_parameters

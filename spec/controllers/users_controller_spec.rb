@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
 
-  before { sign_in create(:user) }
+  before { sign_in create(:admin) }
 
   describe "GET index" do
     it "assigns all users as @users" do
