@@ -15,6 +15,7 @@ private
     user    = user_id.present? && User.find_by_id(user_id)
 
     if user && Devise.secure_compare(user.authentication_token, request.headers["User-Token"])
+      logger.debug "Authenticated via token"
       sign_in user, store: false
     end
   end
