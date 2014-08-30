@@ -5,8 +5,8 @@ class Ability
     if user.admin?
       can :manage, :all
     else
-      can :read, [Location, Comment]
-      can :create, Comment
+      can [:show, :scan] , Location
+      can [:read, :create], Comment
     end
   end
 end

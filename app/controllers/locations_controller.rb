@@ -6,14 +6,15 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    if params[:req].present?
-      @location = Location.find_by_afip_req(params[:req])
-      create_location if @location.nil?
+    @locations = Location.all
+  end
 
-      render action: 'show'
-    else
-      @locations = Location.all
-    end
+  # POST /locations/scan
+  def scan
+    @location = Location.find_by_afip_url(params[:url])
+    create_location if @location.nil?
+
+    render action: 'show'
   end
 
   # GET /locations/1
@@ -78,11 +79,11 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :address, :phone, :afip_req, :photo)
+      params.require(:location).permit(:name, :address, :phone, :afip_url, :photo)
     end
 
     def create_location
-      @location = LocationCrawler.new.get_location(params[:req])
+      @location = LocationCrawler.new.get_location(params[:url])
       @location.save!
     end
 end

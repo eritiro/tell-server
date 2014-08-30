@@ -6,10 +6,10 @@ class LocationCrawler
   end
 
 
-  def get_location(afip_req)
-    location = Location.new(afip_req: afip_req)
+  def get_location(afip_url)
+    location = Location.new(afip_url: afip_url)
     OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:ssl_version] = 'SSLv3'
-    unparsed = open("https://servicios1.afip.gov.ar/clavefiscal/qr/mobilePublicInfo.aspx?req=" + afip_req)
+    unparsed = open(afip_url)
     doc = Nokogiri::HTML(unparsed)
     if doc.css('#lblMensaje').present?
       raise AfipPageError.new("AFIP Message: #{doc.css('#lblMensaje').text}")

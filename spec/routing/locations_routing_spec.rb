@@ -31,5 +31,8 @@ describe LocationsController do
       delete("/locations/1").should route_to("locations#destroy", :id => "1")
     end
 
+    it "routes to #scan" do
+      post("/locations/scan").should route_to("locations#scan")
+    end
   end
 end

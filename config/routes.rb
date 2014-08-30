@@ -3,5 +3,8 @@ TellServer::Application.routes.draw do
   resources :users, except: [:new, :create]
   resources :locations do
     resources :comments
+    collection do
+      post :scan
+    end
   end
 end

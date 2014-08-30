@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(version: 20140826002155) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "afip_req"
+    t.string   "afip_url"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
   end
 
-  add_index "locations", ["afip_req"], name: "index_locations_on_afip_req", unique: true, using: :btree
+  add_index "locations", ["afip_url"], name: "index_locations_on_afip_url", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"
