@@ -15,6 +15,7 @@ describe "users/edit" do
     assert_select "form[action=?][method=?]", user_path(@user), "post" do
       assert_select "input#user_username[name=?]", "user[username]"
       assert_select "input#user_email[name=?]", "user[email]"
+      assert_select "input[type=checkbox]#user_admin[name=?]", "user[admin]"
     end
   end
 end
