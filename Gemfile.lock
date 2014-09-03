@@ -75,8 +75,6 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
-    faraday (0.9.0)
-      multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
     formatador (0.2.4)
     guard (2.6.1)
@@ -92,7 +90,6 @@ GEM
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
-    hashie (3.3.1)
     highline (1.6.21)
     hike (1.2.3)
     i18n (0.6.9)
@@ -103,7 +100,6 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
-    jwt (1.0.0)
     listen (2.7.5)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -117,8 +113,6 @@ GEM
     mini_portile (0.6.0)
     minitest (4.7.5)
     multi_json (1.10.0)
-    multi_xml (0.5.5)
-    multipart-post (2.0.0)
     mysql2 (0.3.16)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -129,23 +123,7 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
-    oauth2 (1.0.0)
-      faraday (>= 0.8, < 0.10)
-      jwt (~> 1.0)
-      multi_json (~> 1.3)
-      multi_xml (~> 0.5)
-      rack (~> 1.2)
     oj (2.9.4)
-    omniauth (1.2.2)
-      hashie (>= 1.2, < 4)
-      rack (~> 1.0)
-    omniauth-facebook (2.0.0)
-      omniauth-oauth2 (~> 1.2)
-    omniauth-oauth2 (1.2.0)
-      faraday (>= 0.8, < 0.10)
-      multi_json (~> 1.3)
-      oauth2 (~> 1.0)
-      omniauth (~> 1.2)
     orm_adapter (0.5.0)
     paperclip (4.1.1)
       activemodel (>= 3.0.0)
@@ -255,8 +233,6 @@ DEPENDENCIES
   mysql2
   nokogiri
   oj
-  omniauth
-  omniauth-facebook
   paperclip
   rack-cors
   rails (= 4.0.0)
