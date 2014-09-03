@@ -57,6 +57,23 @@ describe SocialController do
         user.identities.first.uid.should eq(@me['id'])
         user.identities.first.provider.should eq('facebook')
       end
+
+      context "without email" do
+        before do
+          @me = {
+            "id" => "10152363454658285",
+            "name" => "pomelo"
+          }
+        end
+
+        it "returns a new user with email and stuff" do
+          user = subject.send(:find_or_create_user, @me)
+          user.email.should be_present
+          user.guessed_username.should eq(@me['name'])
+          user.identities.first.uid.should eq(@me['id'])
+          user.identities.first.provider.should eq('facebook')
+        end
+      end
     end
 
     context "with existing user" do
