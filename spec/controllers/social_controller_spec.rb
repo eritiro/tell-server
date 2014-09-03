@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SocialController do
-  describe "POST facebook" do
+  describe "PUT facebook" do
     context "with valid credentials" do
       before do
         @me = {
@@ -13,12 +13,12 @@ describe SocialController do
       end
 
       it "returns success" do
-        post :facebook, {format: :json, token: "abc"}
+        put :facebook, {format: :json, token: "abc"}
         response.status.should eq 200
       end
 
       it "assigns user" do
-        post :facebook, {format: :json, token: "abc"}
+        put :facebook, {format: :json, token: "abc"}
         assigns(:user).should be_a(User)
       end
     end
@@ -29,7 +29,7 @@ describe SocialController do
       end
 
       it "returns unauthorized" do
-        post :facebook, {format: :json, token: "abc"}
+        put :facebook, {format: :json, token: "abc"}
         response.status.should eq 401
       end
 
