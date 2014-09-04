@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :identities
 
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+  validates_uniqueness_of :username, :allow_nil => true, :case_sensitive => false
 
   def to_s
     email

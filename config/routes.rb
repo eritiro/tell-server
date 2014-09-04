@@ -1,7 +1,7 @@
 TellServer::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
 
-  put '/social/facebook', to: 'social#facebook'
+  put '/users/facebook', to: 'social#facebook'
 
   resources :users, except: [:new, :create]
   resources :locations do

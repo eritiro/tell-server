@@ -5,6 +5,11 @@ describe User do
     build(:user).should be_valid
   end
 
+  it "validates unique username" do
+    create(:user, username: "pepe")
+    build(:user, username: "Pepe").should_not be_valid
+  end
+
   describe "authentication_token" do
     it "is generated after save" do
       user = build(:user)
