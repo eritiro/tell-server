@@ -6,6 +6,6 @@ class Location < ActiveRecord::Base
 
   def score
     return nil if comments.empty?
-    comments.map {|c| c.score}.reduce(0, :+) / comments.count
+    comments.last_from_each_user.map {|c| c.score}.reduce(0, :+) / comments.last_from_each_user.count
   end
 end

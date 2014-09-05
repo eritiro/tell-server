@@ -26,6 +26,15 @@ describe Location do
         location.save!
         location.score.should eq 4.5
       end
+
+      it "returns the last score of a user" do
+        location = create(:location)
+        user = create(:user)
+        location.comments << build(:comment, score: 1, author: user)
+        location.comments << build(:comment, score: 5, author: user)
+        location.save!
+        location.score.should eq 5.0
+      end
     end
 
     context "without comments" do

@@ -179,6 +179,17 @@ describe LocationsController do
         end
       end
 
+      context "of an invalid URL" do
+        before do
+          @scan_url = "abcde"
+          LocationCrawler.any_instance.should_receive(:get_location).and_raise(LocationCrawler::LocationCrawlerError)
+          post :scan, { url: @scan_url, format: :json }
+        end
+
+        it { response.status.should eq 422 }
+        it { JSON.parse(response.body)["url"].should eq @scan_url }
+      end
+
       context "of an unexisting location" do
         before do
           LocationCrawler.any_instance.should_receive(:get_location).with("abcde").and_return(build(:location, afip_url: "abcde"))
