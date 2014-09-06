@@ -20,7 +20,8 @@ class LocationCrawler
   end
 
   def validate_url afip_url
-    unless URI.parse(afip_url).kind_of?(URI::HTTPS)
+    result = URI.parse(afip_url)
+    unless result.kind_of?(URI::HTTPS) || result.kind_of?(URI::HTTP)
       raise LocationCrawlerError.new("Invalid url: #{afip_url}")
     end
   rescue URI::InvalidURIError
