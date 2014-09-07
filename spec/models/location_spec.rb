@@ -11,9 +11,9 @@ describe Location do
       build(:location, afip_url: "repeat").should_not be_valid
     end
 
-    it "could be nil" do
-      create(:location, afip_url: nil)
-      build(:location, afip_url: nil).should be_valid
+    it "could repeat blank" do
+      create(:location, afip_url: "")
+      build(:location, afip_url: "").should be_valid
     end
   end
 
