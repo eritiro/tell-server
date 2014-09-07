@@ -13,7 +13,7 @@ describe Location do
 
     it "could repeat blank" do
       create(:location, afip_url: "")
-      build(:location, afip_url: "").should be_valid
+      create(:location, afip_url: "")
     end
   end
 
