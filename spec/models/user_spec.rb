@@ -17,4 +17,14 @@ describe User do
       user.authentication_token.should be_present
     end
   end
+
+  describe "comments" do
+    it "drops comments in cascade" do
+      user = create(:user)
+      create(:comment, author: user)
+      expect {
+        user.destroy
+      }.to change(Comment, :count).by(-1)
+    end
+  end
 end

@@ -5,7 +5,7 @@ class Location < ActiveRecord::Base
   validates_uniqueness_of :afip_url, :allow_blank => true
 
   def score
-    return nil if comments.empty?
+    return nil if comments.last_from_each_user.empty?
     comments.last_from_each_user.map {|c| c.score}.reduce(0, :+) / comments.last_from_each_user.count
   end
 end
