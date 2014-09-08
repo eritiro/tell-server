@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-  include LocationsHelper
   load_and_authorize_resource
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
@@ -16,6 +15,7 @@ class LocationsController < ApplicationController
       @location = LocationCrawler.new.get_location(params[:url])
       @location.save!
     end
+    Event.log 'scan', current_user
     render action: 'show'
   rescue LocationCrawler::LocationCrawlerError => e
     logger.info e

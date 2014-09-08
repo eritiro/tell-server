@@ -4,11 +4,11 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch('config/application.rb')
   watch('config/environment.rb')
   watch('config/environments/test.rb')
+  watch('config/routes.rb')
   watch(%r{^config/initializers/.+\.rb$})
   watch('Gemfile.lock')
   watch('spec/spec_helper.rb') { :rspec }
-  watch('test/test_helper.rb') { :test_unit }
-  watch(%r{features/support/}) { :cucumber }
+  watch(%r{^spec/factories/.+\.rb$})
 end
 
 guard :rspec, cmd: 'rspec --drb', all_on_start: true do

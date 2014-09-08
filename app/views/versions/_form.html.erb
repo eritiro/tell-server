@@ -1,0 +1,29 @@
+<%= form_for(@version) do |f| %>
+  <% if @version.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@version.errors.count, "error") %> prohibited this version from being saved:</h2>
+
+      <ul>
+      <% @version.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :hipotesis %><br>
+    <%= f.text_area :hipotesis %>
+  </div>
+  <div class="field">
+    <%= f.label :blog_url %><br>
+    <%= f.text_field :blog_url %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -4,18 +4,20 @@ module NavigationHelper
     return [] unless user_signed_in?
     items = Array.new
 
-    add_item items, Location
-    add_item items, User
+    add_item items, :metric, Event
+    add_item items, :location
+    add_item items, :user
+    add_item items, :version
 
     items
   end
 
 private
 
-  def add_item items, klass, text = klass.to_s, path = klass
+  def add_item items, key, klass = key.to_s.camelize.constantize
     if can? :index, klass
-      key = klass.to_s.pluralize.downcase
-      items << { text: text, path: path, current: params[:controller].include?(key.to_s) }
+      plural = key.to_s.pluralize
+      items << { text: plural.camelize, path: "/#{plural}", current: params[:controller] == plural.to_s }
     end
   end
 

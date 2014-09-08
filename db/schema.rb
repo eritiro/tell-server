@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140907174243) do
+ActiveRecord::Schema.define(version: 20140908042259) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20140907174243) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "events", force: true do |t|
+    t.string   "event_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
@@ -73,5 +82,13 @@ ActiveRecord::Schema.define(version: 20140907174243) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "versions", force: true do |t|
+    t.string   "name"
+    t.text     "hipotesis"
+    t.string   "blog_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

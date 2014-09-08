@@ -48,6 +48,13 @@ describe CommentsController do
         post :create, {:comment => attributes_for(:comment), location_id: location.to_param, format: :json}
       end
 
+      it "logs the event" do
+        user = create :user
+        sign_in user
+        Event.should_receive(:log).with("comment", user)
+        post :create, { :comment => attributes_for(:comment), location_id: location.to_param }
+      end
+
       it "assigns a newly created comment as @comment" do
         post :create, {:comment => attributes_for(:comment), location_id: location.to_param}
         assigns(:comment).should be_a(Comment)

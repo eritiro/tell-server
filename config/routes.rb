@@ -1,4 +1,6 @@
 TellServer::Application.routes.draw do
+  resources :versions
+
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   put '/users/facebook', to: 'social#facebook'
@@ -10,4 +12,5 @@ TellServer::Application.routes.draw do
       post :scan
     end
   end
+  get 'metrics', to: 'metrics#index'
 end

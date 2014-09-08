@@ -161,9 +161,16 @@ describe LocationsController do
   end
 
   context "with regular user" do
-    before { sign_in create(:user) }
+    let(:current_user){ create(:user) }
+    before { sign_in current_user }
 
     describe "POST scan" do
+      it "logs a scan" do
+        @location = create :location
+        Event.should_receive(:log).with("scan", current_user)
+        post :scan, { url: @location.afip_url, format: :json }
+      end
+
       context "of an existing location" do
         before do
           LocationCrawler.any_instance.should_not_receive(:get_location)
@@ -175,7 +182,7 @@ describe LocationsController do
         it { response.should render_template("show") }
 
         it "does not create a location" do
-          expect{ post(:scan, { url: @location.afip_url, format: :json }) }.to change{Location.count}.by(0)
+          expect{ post(:scan, { url: @location.afip_url, format: :json }) }.to change{ Location.count }.by(0)
         end
       end
 
