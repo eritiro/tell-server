@@ -3,7 +3,7 @@ class Version < ActiveRecord::Base
 
   def events
     next_version = Version.where('id > ?', id).first
-    events = Event.joins(:user).where("users.created_at >= ?", created_at)
+    events = Event.joins(:user).where("users.admin" => false).where("users.created_at >= ?", created_at)
     if next_version.nil?
       events
     else

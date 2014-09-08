@@ -19,32 +19,21 @@ describe Event do
   end
 
   describe "log" do
-    context "when current user is not admin" do
-      context "if the event does not exists" do
-        it "creates a new event" do
-          user = build :user
-          expect {
-            Event.log 'scan', user
-          }.to change{ Event.count }.by(1)
-        end
-      end
-
-      context "if the event exists" do
-        it "does not create a new event" do
-          user = build :user
-          create :event, :scan, user: user
-          expect {
-            Event.log 'scan', user
-          }.to change{ Event.count }.by(0)
-        end
+    context "if the event does not exists" do
+      it "creates a new event" do
+        user = build :user
+        expect {
+          Event.log 'scan', user
+        }.to change{ Event.count }.by(1)
       end
     end
 
-    context "when current user is admin" do
+    context "if the event exists" do
       it "does not create a new event" do
-        admin = build :admin
+        user = build :user
+        create :event, :scan, user: user
         expect {
-          Event.log 'scan', admin
+          Event.log 'scan', user
         }.to change{ Event.count }.by(0)
       end
     end

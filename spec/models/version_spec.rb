@@ -17,6 +17,13 @@ describe Version do
       create_list(:event, 2, :scan, user: user)
       version.events.count.should eq 0
     end
+
+    it "ignores administrators" do
+      version = create(:version)
+      admin = create(:admin)
+      create(:event, :scan, user: admin)
+      version.events.count.should eq 0
+    end
   end
 
   describe "number_of_users" do

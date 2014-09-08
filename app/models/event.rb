@@ -6,6 +6,6 @@ class Event < ActiveRecord::Base
   validates_inclusion_of :event_type, in: TYPES
 
   def self.log event_type, user
-    find_or_create_by event_type: event_type, user: user unless user.admin?
+    find_or_create_by event_type: event_type, user: user
   end
 end
