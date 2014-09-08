@@ -12,6 +12,6 @@ class Version < ActiveRecord::Base
   end
 
   def number_of_users
-    events.where(event_type: 'registration').count
+    @number_of_users ||= events.where(event_type: 'registration').count
   end
 end
