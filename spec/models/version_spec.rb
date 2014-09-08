@@ -24,6 +24,18 @@ describe Version do
       create(:event, :scan, user: admin)
       version.events.count.should eq 0
     end
+
+    context "being an old version" do
+      it "ignores new events of its users" do
+        version = create(:version)
+        user = create(:user)
+        Timecop.travel(1.minute.from_now)
+        create(:version)
+        create(:event, :scan, user: user)
+
+        version.events.count.should eq 0
+      end
+    end
   end
 
   describe "number_of_users" do

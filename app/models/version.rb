@@ -7,7 +7,7 @@ class Version < ActiveRecord::Base
     if next_version.nil?
       events
     else
-      events.where('users.created_at < ?', next_version.created_at)
+      events.where('events.created_at < ?', next_version.created_at)
     end
   end
 
