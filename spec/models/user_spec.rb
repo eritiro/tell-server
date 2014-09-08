@@ -18,13 +18,29 @@ describe User do
     end
   end
 
-  describe "comments" do
-    it "drops comments in cascade" do
+  describe "on destroy" do
+    it "destroy they comments" do
       user = create(:user)
       create(:comment, author: user)
       expect {
         user.destroy
       }.to change(Comment, :count).by(-1)
+    end
+
+    it "destroy they events" do
+      user = create(:user)
+      create(:event, user: user)
+      expect {
+        user.destroy
+      }.to change(Event, :count).by(-1)
+    end
+
+    it "destroy they identities" do
+      user = create(:user)
+      create(:identity, user: user)
+      expect {
+        user.destroy
+      }.to change(Identity, :count).by(-1)
     end
   end
 end
