@@ -46,8 +46,13 @@ describe SocialController do
     end
 
     context "without existing user" do
-      it "creates a new user user" do
+      it "creates a new user" do
         expect { subject.send(:find_or_create_user, @me) }.to change(User, :count).by(1)
+      end
+
+      it "creates a new registration event" do
+        expect { subject.send(:find_or_create_user, @me) }.to change(Event, :count).by(1)
+        Event.last.event_type.should eq('registration')
       end
 
       it "returns a new user with email and stuff" do
@@ -84,6 +89,10 @@ describe SocialController do
       it "adds an identity to the user" do
         subject.send(:find_or_create_user, @me)
         @user.reload.identities.first.uid.should eq(@me['id'])
+      end
+
+      it "does not create a new event" do
+        expect { subject.send(:find_or_create_user, @me) }.to change(Event, :count).by(0)
       end
 
       context "and existing identity" do

@@ -28,6 +28,7 @@ private
         )
 
         user.save!
+        Event.log 'registration', user
       end
       if identity.user != user
         identity.user = user
