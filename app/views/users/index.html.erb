@@ -3,10 +3,11 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Picture</th>
       <th>Username</th>
       <th>Email</th>
       <th>Admin</th>
-      <th>Picture</th>
+      <th>Social IDs</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,10 +17,11 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= image_tag(user.picture.url(:thumb)) %></td>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
         <td><%= user.admin %></td>
-        <td><%= image_tag(user.picture.url(:thumb)) %></td>
+        <td><%= user.identities.map(&:provider).join(', ') %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
