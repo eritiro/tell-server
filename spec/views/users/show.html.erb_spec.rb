@@ -2,16 +2,22 @@ require 'spec_helper'
 
 describe "users/show" do
   before(:each) do
-    @user = assign(:user, stub_model(User,
-      :username => "Username",
-      :email => "Email"
-    ))
+    @user = build(:user)
+    @event = build(:event)
+    @user.events << @event
+    assign(:user, @user)
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Username/)
-    rendered.should match(/Email/)
+
+    rendered.should match(@user.username)
+    rendered.should match(@user.email)
+  end
+
+  it "renders events" do
+    render
+
+    rendered.should match(@event.event_type)
   end
 end

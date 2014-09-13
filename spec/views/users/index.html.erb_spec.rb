@@ -5,7 +5,7 @@ describe "users/index" do
     @identities = []
     @identities << build(:identity, provider: 'facebook')
     @identities << build(:identity, provider: 'twitter')
-
+    @versions = assign(:versions, build_list(:version, 2))
     @users = assign(:users, build_list(:user, 2, identities: @identities))
   end
 
@@ -20,5 +20,10 @@ describe "users/index" do
   it "renders the social networks providers" do
     render
     assert_select "tr>td", text: "facebook, twitter"
+  end
+
+  it "renders the version option" do
+    render
+    assert_select "select>option", text: @versions.first.name
   end
 end

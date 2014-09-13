@@ -19,5 +19,17 @@
   <%= @user.admin %>
 </p>
 
+<p>
+  <strong>Events:</strong>
+  <ul>
+    <% @user.events.each do |event| %>
+      <li><%= event.event_type %></li>
+    <% end%>
+  </ul>
+
+</p>
+
+
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

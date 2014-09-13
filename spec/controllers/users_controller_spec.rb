@@ -10,6 +10,31 @@ describe UsersController do
       get :index, {}
       assigns(:users).should include(user)
     end
+
+    it "assigns all versions as @versions" do
+      version = create :version
+      get :index, {}
+      assigns(:versions).should include(version)
+    end
+
+    context "with version_id" do
+      it "includes user created after version" do
+        version = create :version
+        user = create :user
+        create(:event, :registration, user: user)
+        get :index, { version_id: version.id }
+        assigns(:users).should include(user)
+      end
+
+      it "does not includes user created before version" do
+        user = create :user
+        create(:event, :registration, user: user)
+        Timecop.travel(1.minute.from_now)
+        version = create :version
+        get :index, { version_id: version.id }
+        assigns(:users).should_not include(user)
+      end
+    end
   end
 
   describe "GET show" do

@@ -5,7 +5,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:version_id].present?
+      @users = Version.find(params[:version_id]).events.registration.map(&:user)
+    else
+      @users = User.all
+    end
+    @versions = Version.all
   end
 
   # GET /users/1

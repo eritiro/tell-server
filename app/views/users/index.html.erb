@@ -1,5 +1,10 @@
 <h1>Listing users</h1>
 
+<%= form_tag(:users, method: :get, class: 'search-box') do %>
+  <%= label_tag :version %>
+  <%= select_tag :version_id, options_for_select(@versions.collect {|p| [ p.name, p.id ] }, params[:version_id]), :prompt => "All" %>
+  <%= submit_tag "Search", class: 'btn pull-right' %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
