@@ -1,12 +1,15 @@
 defaults: &DEFAULTS
+  mailing:
+    api_key: key-9hwv5yr-a10nl7gebowlqxvgtiihu4x7
+    domain: startmeapps.com
 development:
   <<: *DEFAULTS
-  host: http://localhost:3000
+  host: localhost:3000
 
 test:
   <<: *DEFAULTS
-  host: http://test.com
+  host: test.com
 
 production:
   <<: *DEFAULTS
-  host: http://tell.startmeapps.com
+  host: tell.startmeapps.com

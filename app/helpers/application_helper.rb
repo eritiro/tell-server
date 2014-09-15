@@ -1,5 +1,9 @@
 module ApplicationHelper
   def absolute_url(url)
-    URI::join(APP_CONFIG['host'], url).to_s
+    URI::join(host, url).to_s
+  end
+
+  def host
+    "http://#{APP_CONFIG['host']}"
   end
 end

@@ -115,6 +115,11 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailgun (0.8)
+      rest-client
+    mailgun_rails (0.6.1)
+      rails (>= 3.2.13)
+      rest-client (>= 1.6.7)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.6.0)
@@ -129,6 +134,7 @@ GEM
     net-ssh (2.9.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    netrc (0.7.7)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     oj (2.9.4)
@@ -169,6 +175,9 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -241,6 +250,8 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   koala
+  mailgun
+  mailgun_rails
   mysql2
   nokogiri
   oj
