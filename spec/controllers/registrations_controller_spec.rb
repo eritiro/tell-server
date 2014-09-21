@@ -17,8 +17,8 @@ describe RegistrationsController do
       before { sign_in user }
       describe "with valid params" do
         it "updates the requested user" do
-          User.any_instance.should_receive(:update_without_password).with({ "username" => "MyString" })
-          put :update, { :user => { "username" => "MyString" } }
+          User.any_instance.should_receive(:update_without_password).with({ 'username' => 'suelopoder', 'completed_tutorial' => 'true' })
+          put :update, { :user => { username: "suelopoder", completed_tutorial: "true" } }
         end
 
         it "does not mess up with events" do

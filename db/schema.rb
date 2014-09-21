@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908042259) do
+ActiveRecord::Schema.define(version: 20140921171417) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140908042259) do
     t.string   "authentication_token"
     t.boolean  "admin",                  default: false, null: false
     t.string   "guessed_username"
+    t.boolean  "completed_tutorial",     default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
