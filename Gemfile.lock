@@ -35,6 +35,13 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
     arel (4.0.2)
+    axlsx (2.0.0)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (= 0.9.9)
+    axlsx_rails (0.1.5)
+      axlsx
+      rails (>= 3.1)
     bcrypt (3.1.7)
     builder (3.1.4)
     cancancan (1.9.2)
@@ -98,6 +105,7 @@ GEM
       spork (>= 0.8.4)
     highline (1.6.21)
     hike (1.2.3)
+    htmlentities (4.3.1)
     i18n (0.6.9)
     jbuilder (2.0.7)
       activesupport (>= 3.0.0, < 5)
@@ -197,6 +205,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rubyzip (0.9.9)
     rvm-capistrano (1.5.1)
       capistrano (~> 2.15.4)
     sass (3.2.19)
@@ -244,6 +253,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  axlsx_rails
   cancancan
   capistrano
   devise

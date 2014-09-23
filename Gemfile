@@ -19,6 +19,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'mailgun'
 gem 'mailgun_rails'
 gem 'exception_notification'
+gem 'axlsx_rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

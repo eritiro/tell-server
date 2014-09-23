@@ -57,3 +57,7 @@ body {
   margin: 5px;
   border: solid 1px #CCCCCC;
 }
+
+.search-box .btn{
+  margin-left: 5px;
+}

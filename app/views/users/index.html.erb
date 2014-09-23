@@ -3,7 +3,8 @@
 <%= form_tag(:users, method: :get, class: 'search-box') do %>
   <%= label_tag :version %>
   <%= select_tag :version_id, options_for_select(@versions.collect {|p| [ p.name, p.id ] }, params[:version_id]), :prompt => "All" %>
-  <%= submit_tag "Search", class: 'btn pull-right' %>
+  <%= submit_tag "Export", class: 'btn btn-secondary pull-right' %>
+  <%= submit_tag "Search", class: 'btn btn-primary pull-right' %>
 <% end %>
 <table class="table">
   <thead>

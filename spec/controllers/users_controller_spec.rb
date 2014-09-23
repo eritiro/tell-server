@@ -35,6 +35,14 @@ describe UsersController do
         assigns(:users).should_not include(user)
       end
     end
+
+    context "with Export commit" do
+      it "exports an xlsx file" do
+        user = create :user
+        get :index, { commit: 'Export' }
+        response.headers["Content-Type"].should eq "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      end
+    end
   end
 
   describe "GET show" do

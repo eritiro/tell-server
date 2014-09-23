@@ -11,6 +11,10 @@ class UsersController < ApplicationController
       @users = User.all
     end
     @versions = Version.all
+
+    if params[:commit] == 'Export'
+      render xlsx: 'index', filename: "users-#{Time.zone.now}.xlsx"
+    end
   end
 
   # GET /users/1
