@@ -2,7 +2,6 @@ class Version < ActiveRecord::Base
   validates_presence_of :name
 
   def events
-    next_version = Version.where('id > ?', id).first
     events = Event.joins(:user).where("users.admin" => false).where("users.created_at >= ?", created_at)
     if next_version.nil?
       events
@@ -13,5 +12,19 @@ class Version < ActiveRecord::Base
 
   def number_of_users
     @number_of_users ||= events.registration.count
+  end
+
+  def days_online
+    if next_version.nil?
+      (Time.zone.now.to_date - created_at.to_date).to_i
+    else
+      (next_version.created_at.to_date - created_at.to_date).to_i
+    end
+  end
+
+private
+
+  def next_version
+    Version.where('id > ?', id).first
   end
 end

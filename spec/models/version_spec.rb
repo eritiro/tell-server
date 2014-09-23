@@ -77,4 +77,24 @@ describe Version do
       end
     end
   end
+
+  describe "days_online" do
+    context "being the last version" do
+      it "returns the days since it was created" do
+        version = create(:version)
+        Timecop.travel(2.day.from_now)
+        version.days_online.should eq 2
+      end
+    end
+
+    context "not being the last version" do
+      it "returns the days until the next version" do
+        version = create(:version)
+        Timecop.travel(1.day.from_now)
+        create(:version)
+        Timecop.travel(2.day.from_now)
+        version.days_online.should eq 1
+      end
+    end
+  end
 end

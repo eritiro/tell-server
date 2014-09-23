@@ -8,7 +8,11 @@
         <th class="col-sm-2">
           <%= version.name %>
           <br/>
-          <small><%= version.created_at.to_date %> (users: <%= version.number_of_users %>)</small>
+          <small><%= version.created_at.to_date %></small><br/>
+          <small>
+            users: <%= version.number_of_users %>
+            days online: <%= version.days_online %>
+          </small>
         </th>
       <% end %>
     </tr>
