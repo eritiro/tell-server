@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe "versions/show" do
   before(:each) do
-    @version = assign(:version, stub_model(Version,
+    @version = assign(:version, build(:version,
       :name => "Name",
       :hipotesis => "MyText",
-      :blog_url => "Blog Url"
+      :blog_url => "Blog Url",
+      :version_number => "1.0.0"
     ))
   end
 
@@ -15,5 +16,6 @@ describe "versions/show" do
     rendered.should match(/Name/)
     rendered.should match(/MyText/)
     rendered.should match(/Blog Url/)
+    rendered.should match(/1.0.0/)
   end
 end

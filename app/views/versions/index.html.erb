@@ -6,6 +6,7 @@
       <th>Release date</th>
       <th>Name</th>
       <th>Number of users</th>
+      <th>Days online</th>
       <th></th>
       <th></th>
       <th></th>
@@ -19,6 +20,7 @@
         <td><%= version.created_at %></td>
         <td><%= version.name %></td>
         <td><%= version.number_of_users %></td>
+        <td><%= version.days_online %></td>
         <td><%= link_to 'Blog post', version.blog_url, target: '_blank' if version.blog_url.present? %></td>
         <td><%= link_to 'Show', version %></td>
         <td><%= link_to 'Edit', edit_version_path(version) %></td>
