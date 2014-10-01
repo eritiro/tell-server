@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140923025319) do
+ActiveRecord::Schema.define(version: 20140930233942) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140923025319) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "ip"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20140923025319) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "version_number"
+    t.boolean  "has_landing",    default: true
   end
 
 end

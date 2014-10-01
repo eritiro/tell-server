@@ -2,7 +2,7 @@ class Version < ActiveRecord::Base
   validates_presence_of :name
 
   def events
-    events = Event.joins(:user).where("users.admin" => false).where("users.created_at >= ?", created_at)
+    events = events_without_user.joins(:user).where("users.admin" => false).where("users.created_at >= ?", created_at)
     if next_version.nil?
       events
     else
@@ -10,8 +10,20 @@ class Version < ActiveRecord::Base
     end
   end
 
+  def events_without_user
+    if next_version.nil?
+      Event.all
+    else
+      Event.where('events.created_at < ?', next_version.created_at)
+    end
+  end
+
   def number_of_users
-    @number_of_users ||= events.registration.count
+    @number_of_users ||= if has_landing
+      events_without_user.landing.count
+    else
+      events.registration.count
+    end
   end
 
   def days_online

@@ -9,6 +9,12 @@ class MetricsController < ApplicationController
       @versions.each do |version|
         if version.number_of_users == 0
           values << nil
+        elsif event_type == 'landing'
+          if version.has_landing
+            values << 100 * version.events_without_user.where(event_type: event_type).count / version.number_of_users
+          else
+            values << nil
+          end
         else
           values << 100 * version.events.where(event_type: event_type).count / version.number_of_users
         end

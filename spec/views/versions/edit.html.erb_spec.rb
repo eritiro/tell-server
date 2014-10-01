@@ -17,6 +17,7 @@ describe "versions/edit" do
       assert_select "input#version_name[name=?]", "version[name]"
       assert_select "textarea#version_hipotesis[name=?]", "version[hipotesis]"
       assert_select "input#version_blog_url[name=?]", "version[blog_url]"
+      assert_select "input[type=checkbox]#version_has_landing[name=?]", "version[has_landing]"
     end
   end
 end
