@@ -1,10 +1,10 @@
 class PagesController < ActionController::Base
 
   def index
-    Event.log_without_user 'landing', request.remote_ip
   end
 
-  def landing
-
+  def land
+    Event.log_without_user 'landing', request.remote_ip
+    head :no_content
   end
 end

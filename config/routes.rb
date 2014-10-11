@@ -1,6 +1,8 @@
 TellServer::Application.routes.draw do
 
   root to: 'pages#index'
+  post '/land', to: 'pages#land'
+
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   put '/users/facebook', to: 'social#facebook'
