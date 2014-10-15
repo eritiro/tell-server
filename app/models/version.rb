@@ -2,19 +2,15 @@ class Version < ActiveRecord::Base
   validates_presence_of :name
 
   def events
-    events = events_without_user.joins(:user).where("users.admin" => false).where("users.created_at >= ?", created_at)
-    if next_version.nil?
-      events
-    else
-      events.where('events.created_at < ?', next_version.created_at)
-    end
+    events_without_user.joins(:user).where("users.admin" => false).where("users.created_at >= ?", created_at)
   end
 
   def events_without_user
+    events_without_user = Event.where("events.created_at >= ?", created_at)
     if next_version.nil?
-      Event.all
+      events_without_user
     else
-      Event.where('events.created_at < ?', next_version.created_at)
+      events_without_user.where('events.created_at < ?', next_version.created_at)
     end
   end
 

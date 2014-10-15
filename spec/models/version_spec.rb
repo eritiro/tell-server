@@ -45,10 +45,48 @@ describe Version do
         create_list(:event, 1, :landing)
         version.number_of_users.should eq 1
       end
+
+      context "being the last version" do
+        it "returns the count of last event registrations" do
+          version = create(:version)
+          create_list(:event, 2, :landing)
+          version.number_of_users.should eq 2
+        end
+
+        it "ignores previous registrations" do
+          event_time = Time.now
+          create(:event, :landing)
+          Timecop.travel(1.minute.from_now)
+          version = create(:version)
+          version.number_of_users.should eq 0
+        end
+      end
+
+      context "not being the last version" do
+        it "returns the count of last event registrations after the new version" do
+          version = create(:version)
+          Timecop.travel(1.minute.from_now)
+          create(:event, :landing)
+          Timecop.travel(1.minute.from_now)
+          create(:version)
+          Timecop.travel(1.minute.from_now)
+          create(:event, :landing)
+
+          version.number_of_users.should eq 1
+        end
+
+        it "ignores previous registrations" do
+          event_time = Time.now
+          create(:event, :landing)
+          Timecop.travel(1.minute.from_now)
+          version = create(:version)
+          version.number_of_users.should eq 0
+        end
+      end
     end
 
     context "not having landings" do
-      it "returns landings" do
+      it "returns registrations" do
         version = create(:version, has_landing: false)
         create_list(:event, 1, :registration)
         version.number_of_users.should eq 1
