@@ -3,6 +3,7 @@ class SocialController < ApplicationController
   skip_authorization_check
 
   def facebook
+    OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:ssl_version] = "SSLv23"
     @graph = Koala::Facebook::API.new(params[:token])
     @user = find_or_create_user(@graph.get_object("me"))
 
