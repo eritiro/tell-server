@@ -8,20 +8,6 @@ class LocationsController < ApplicationController
     @locations = Location.all
   end
 
-  # POST /locations/scan
-  def scan
-    @location = Location.find_by_afip_url(params[:url])
-    if @location.nil?
-      @location = LocationCrawler.new.get_location(params[:url])
-      @location.save!
-    end
-    Event.log 'scan', current_user
-    render action: 'show'
-  rescue LocationCrawler::LocationCrawlerError => e
-    logger.info e
-    render json: { url: params[:url] }, status: :unprocessable_entity
-  end
-
   # GET /locations/1
   # GET /locations/1.json
   def show
@@ -84,6 +70,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :address, :phone, :afip_url, :photo)
+      params.require(:location).permit(:name, :address, :phone, :photo)
     end
 end

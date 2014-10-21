@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140930233942) do
+ActiveRecord::Schema.define(version: 20141021225505) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -48,14 +48,11 @@ ActiveRecord::Schema.define(version: 20140930233942) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "afip_url"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
   end
-
-  add_index "locations", ["afip_url"], name: "index_locations_on_afip_url", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

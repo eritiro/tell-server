@@ -6,6 +6,5 @@ FactoryGirl.define do
     address "102 Apple st."
     phone "1-101-1011"
     photo_file_name "location.jpeg"
-    sequence(:afip_url) { |n| "http://afip.something.com/ABCDEFGH#{n}" }
   end
 end
