@@ -6,6 +6,7 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.all
+    @locations = @locations.where("name like '#{params['name']}'") if params['name'].present?
   end
 
   # GET /locations/1
