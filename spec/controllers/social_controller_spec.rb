@@ -7,7 +7,9 @@ describe SocialController do
         @me = {
           "id" => "10152363454658285",
           "email" => "pomelo@gmail.com",
-          "name" => "pomelo"
+          "name" => "pomelo",
+          "gender" => "male",
+          "birthday" => "08/04/1985"
         }
         Koala::Facebook::API.any_instance.should_receive(:get_object).with("me").and_return(@me)
       end
@@ -41,7 +43,9 @@ describe SocialController do
       @me = {
         "id" => "10152363454658285",
         "email" => "pomelo@gmail.com",
-        "name" => "pomelo"
+        "name" => "pomelo",
+        "gender" => "male",
+        "birthday" => "08/04/1985"
       }
     end
 
@@ -67,7 +71,9 @@ describe SocialController do
         before do
           @me = {
             "id" => "10152363454658285",
-            "name" => "pomelo"
+            "name" => "pomelo",
+            "gender" => "male",
+            "birthday" => "08/04/1985"
           }
         end
 
@@ -75,6 +81,9 @@ describe SocialController do
           user = subject.send(:find_or_create_user, @me)
           user.email.should be_present
           user.guessed_username.should eq(@me['name'])
+          user.gender.should eq('male')
+          user.birthday.should eq Date.new(1985, 8, 4)
+
           user.identities.first.uid.should eq(@me['id'])
           user.identities.first.provider.should eq('facebook')
         end

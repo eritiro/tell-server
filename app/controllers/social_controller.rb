@@ -25,6 +25,8 @@ private
         user = User.new(
           guessed_username: me["name"],
           email: email,
+          gender:  me["gender"],
+          birthday: Date.strptime(me["birthday"], "%m/%d/%Y"),
           password: Devise.friendly_token[0,20]
         )
 

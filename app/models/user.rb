@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates_uniqueness_of :username, :allow_nil => true, :case_sensitive => false
+  validates_inclusion_of :gender, in: ['male', 'female']
 
   def to_s
     email

@@ -18,6 +18,14 @@ describe User do
     end
   end
 
+  describe "gender" do
+    it "should be male or female" do
+      build(:user, gender: 'male').should be_valid
+      build(:user, gender: 'female').should be_valid
+      build(:user, gender: 'other').should_not be_valid
+    end
+  end
+
   describe "on destroy" do
     it "destroy they comments" do
       user = create(:user)

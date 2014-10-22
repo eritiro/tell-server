@@ -11,15 +11,17 @@ describe LocationsController do
         assigns(:locations).should eq([location])
       end
 
-      it "filters @locations by name" do
-        this_location = create(:location, name: 'this')
+      it "excludes 'that' when searching for 'this'" do
         that_location = create(:location, name: 'that')
         get :index, { name: 'this' }
-        assigns(:locations).should include(this_location)
         assigns(:locations).should_not include(that_location)
-
       end
 
+      it "includes 'that' when searching for 'th'" do
+        that_location = create(:location, name: 'that')
+        get :index, { name: 'th' }
+        assigns(:locations).should include(that_location)
+      end
 
       describe '.json' do
         render_views
