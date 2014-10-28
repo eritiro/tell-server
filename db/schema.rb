@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021233645) do
+ActiveRecord::Schema.define(version: 20141028221942) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 20141021233645) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
   end
+
+  create_table "user_photos", force: true do |t|
+    t.string   "url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_photos", ["user_id"], name: "index_user_photos_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

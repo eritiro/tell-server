@@ -11,7 +11,13 @@ describe SocialController do
           "gender" => "male",
           "birthday" => "08/04/1985"
         }
-        Koala::Facebook::API.any_instance.should_receive(:get_object).with("me").and_return(@me)
+        @photos = [
+          { "source" => "http://example.url.com/1.jpg" },
+          { "source" => "http://example.url.com/2.jpg" }
+        ]
+
+        @batch_api = Object.new
+        Koala::Facebook::API.any_instance.should_receive(:batch).and_return([@me, @photos])
       end
 
       it "returns success" do

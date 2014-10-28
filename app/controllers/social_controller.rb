@@ -5,9 +5,19 @@ class SocialController < ApplicationController
   def facebook
     OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:ssl_version] = "SSLv23"
     @graph = Koala::Facebook::API.new(params[:token])
-    @user = find_or_create_user(@graph.get_object("me"))
+    @data = {}
 
-    render json: @user
+    me, photos = @graph.batch do |batch_api|
+      batch_api.get_object('me')
+      batch_api.get_connections('me', 'photos', :fields=>"source")
+    end
+
+    @data[:photos] = photos.map { |p| p["source"] }
+    @data[:me] = me
+
+    @user = find_or_create_user(@data[:me])
+    #@user.user_photos = @data[:photos].map { |photo| UserPhoto.new(url: photo) }
+
   rescue Koala::Facebook::AuthenticationError
     access_denied
   end
