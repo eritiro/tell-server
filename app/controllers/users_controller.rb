@@ -72,7 +72,8 @@ class UsersController < ApplicationController
   end
 
   def notify
-    GCM.send_notification @user.device_token
+    GCM.send_notification @user.device_token, { message: 'A donde vas a ir esta noche?', title: "Hola #{@user.username}" }
+
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully notified.' }
       format.json { head :no_content }
