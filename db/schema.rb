@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 20141028230046) do
     t.datetime "photo_updated_at"
   end
 
+  create_table "user_photos", force: true do |t|
+    t.string   "url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_photos", ["user_id"], name: "index_user_photos_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email",                                  null: false
