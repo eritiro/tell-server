@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :notify]
 
   # GET /users
   # GET /users.json
@@ -67,6 +67,14 @@ class UsersController < ApplicationController
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def notify
+    GCM.send_notification @user.device_token
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully notified.' }
       format.json { head :no_content }
     end
   end

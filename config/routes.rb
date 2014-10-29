@@ -8,7 +8,11 @@ TellServer::Application.routes.draw do
   put '/users/facebook', to: 'social#facebook'
   put '/users/photo_select', to: 'social#photo_select'
 
-  resources :users, except: [:new, :create]
+  resources :users, except: [:new, :create] do
+    member do
+      post :notify
+    end
+  end
   resources :versions
   resources :locations do
     resources :comments
