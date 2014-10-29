@@ -13,6 +13,7 @@ class SocialController < ApplicationController
     end
 
     @data[:photos] = photos.map { |p| p["source"] }
+    @data[:me]['device_token'] = params[:device_token]
     @user = find_or_create_user(@data[:me])
 
   rescue Koala::Facebook::AuthenticationError
@@ -42,7 +43,8 @@ private
           email: email,
           gender:  me["gender"],
           birthday: Date.strptime(me["birthday"], "%m/%d/%Y"),
-          password: Devise.friendly_token[0,20]
+          password: Devise.friendly_token[0,20],
+          device_token:  me["device_token"]
         )
 
         user.save!
