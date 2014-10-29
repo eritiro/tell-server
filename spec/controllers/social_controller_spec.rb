@@ -44,6 +44,25 @@ describe SocialController do
     end
   end
 
+  describe "PUT photo_select" do
+    context "with valid id" do
+      before do
+        @user = create :user
+      end
+
+      it "returns no content" do
+        put :photo_select, { id: @user.id, photos: [ "a", "b" ] }
+        response.status.should eq 204
+      end
+
+      it "sets photos" do
+        put :photo_select, { id: @user.id, photos: [ "a", "b" ] }
+        @user.reload
+        @user.user_photos.should have(2).items
+      end
+    end
+  end
+
   describe "find_or_create_user" do
     before do
       @me = {

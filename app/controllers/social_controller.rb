@@ -7,17 +7,22 @@ class SocialController < ApplicationController
     @graph = Koala::Facebook::API.new(params[:token])
     @data = {}
 
-    me, photos = @graph.batch do |batch_api|
+    @data[:me], photos = @graph.batch do |batch_api|
       batch_api.get_object('me')
       batch_api.get_connections('me', 'photos', :fields=>"source")
     end
 
     @data[:photos] = photos.map { |p| p["source"] }
-    @data[:me] = me
-
     @user = find_or_create_user(@data[:me])
-    #@user.user_photos = @data[:photos].map { |photo| UserPhoto.new(url: photo) }
 
+  rescue Koala::Facebook::AuthenticationError
+    access_denied
+  end
+
+  def photo_select
+    @user = User.find(params[:id])
+    @user.user_photos = params[:photos].map { |photo| UserPhoto.new(url: photo) }
+    head :no_content
   rescue Koala::Facebook::AuthenticationError
     access_denied
   end
