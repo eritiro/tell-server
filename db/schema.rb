@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021233645) do
+ActiveRecord::Schema.define(version: 20141028230046) do
 
   create_table "comments", force: true do |t|
     t.text     "text"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20141021233645) do
     t.boolean  "completed_tutorial",     default: false
     t.string   "gender"
     t.date     "birthday"
+    t.string   "device_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -20,6 +20,7 @@ gem 'mailgun'
 gem 'mailgun_rails'
 gem 'exception_notification'
 gem 'axlsx_rails'
+gem 'pushmeup'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
