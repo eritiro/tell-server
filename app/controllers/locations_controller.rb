@@ -63,6 +63,15 @@ class LocationsController < ApplicationController
     end
   end
 
+  def attend
+    current_user.location = @location
+    current_user.save!
+    respond_to do |format|
+      format.html { redirect_to @location, notice: 'You are going!' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
