@@ -27,6 +27,10 @@ describe LocationsController do
       put("/locations/1").should route_to("locations#update", :id => "1")
     end
 
+    it "routes to #attend" do
+      put("/locations/1/attend").should route_to("locations#attend", :id => "1")
+    end
+
     it "routes to #destroy" do
       delete("/locations/1").should route_to("locations#destroy", :id => "1")
     end

@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  TYPES = ['landing', 'registration', 'scan', 'comment']
+  TYPES = ['landing', 'registration', 'search', 'attend', 'chat']
 
   belongs_to :user
   validates_presence_of :event_type

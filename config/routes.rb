@@ -15,7 +15,9 @@ TellServer::Application.routes.draw do
   end
   resources :versions
   resources :locations do
-    resources :comments
+    member do
+      put :attend
+    end
   end
   get 'metrics', to: 'metrics#index'
 end

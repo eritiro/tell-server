@@ -15,11 +15,7 @@ class Version < ActiveRecord::Base
   end
 
   def number_of_users
-    @number_of_users ||= if has_landing
-      events_without_user.landing.count
-    else
-      events.registration.count
-    end
+    events_without_user.landing.count
   end
 
   def days_online

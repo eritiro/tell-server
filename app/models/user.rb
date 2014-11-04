@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
 
   has_attached_file :picture, :styles => { :medium => "400x400>", :thumb => "100x100>" }, :default_url => "/images/user_missing_:style.png"
   has_many :identities, dependent: :destroy
-  has_many :comments, foreign_key: :author_id, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :user_photos, dependent: :destroy
+  belongs_to :location
 
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates_uniqueness_of :username, :allow_nil => true, :case_sensitive => false

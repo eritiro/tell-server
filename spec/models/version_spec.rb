@@ -14,14 +14,14 @@ describe Version do
       user = create(:user)
       Timecop.travel(1.minute.from_now)
       version = create(:version)
-      create_list(:event, 2, :scan, user: user)
+      create_list(:event, 2, :search, user: user)
       version.events.count.should eq 0
     end
 
     it "ignores administrators" do
       version = create(:version)
       admin = create(:admin)
-      create(:event, :scan, user: admin)
+      create(:event, :search, user: admin)
       version.events.count.should eq 0
     end
 
@@ -31,7 +31,7 @@ describe Version do
         user = create(:user)
         Timecop.travel(1.minute.from_now)
         create(:version)
-        create(:event, :scan, user: user)
+        create(:event, :search, user: user)
 
         version.events.count.should eq 0
       end
@@ -80,52 +80,6 @@ describe Version do
           create(:event, :landing)
           Timecop.travel(1.minute.from_now)
           version = create(:version)
-          version.number_of_users.should eq 0
-        end
-      end
-    end
-
-    context "not having landings" do
-      it "returns registrations" do
-        version = create(:version, has_landing: false)
-        create_list(:event, 1, :registration)
-        version.number_of_users.should eq 1
-      end
-
-      context "being the last version" do
-        it "returns the count of last event registrations" do
-          version = create(:version, has_landing: false)
-          create_list(:event, 2, :registration)
-          version.number_of_users.should eq 2
-        end
-
-        it "ignores previous registrations" do
-          event_time = Time.now
-          create(:event, :registration)
-          Timecop.travel(1.minute.from_now)
-          version = create(:version, has_landing: false)
-          version.number_of_users.should eq 0
-        end
-      end
-
-      context "not being the last version" do
-        it "returns the count of last event registrations after the new version" do
-          version = create(:version, has_landing: false)
-          Timecop.travel(1.minute.from_now)
-          create(:event, :registration)
-          Timecop.travel(1.minute.from_now)
-          create(:version)
-          Timecop.travel(1.minute.from_now)
-          create(:event, :registration)
-
-          version.number_of_users.should eq 1
-        end
-
-        it "ignores previous registrations" do
-          event_time = Time.now
-          create(:event, :registration)
-          Timecop.travel(1.minute.from_now)
-          version = create(:version, has_landing: false)
           version.number_of_users.should eq 0
         end
       end

@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028230046) do
-
-  create_table "comments", force: true do |t|
-    t.text     "text"
-    t.decimal  "score",       precision: 4, scale: 1
-    t.integer  "author_id",                           null: false
-    t.integer  "location_id",                         null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20141104224801) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -88,9 +79,11 @@ ActiveRecord::Schema.define(version: 20141028230046) do
     t.string   "gender"
     t.date     "birthday"
     t.string   "device_token"
+    t.integer  "location_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
@@ -101,7 +94,6 @@ ActiveRecord::Schema.define(version: 20141028230046) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "version_number"
-    t.boolean  "has_landing",    default: true
   end
 
 end

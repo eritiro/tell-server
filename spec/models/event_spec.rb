@@ -19,7 +19,7 @@ describe Event do
       it "creates a new event" do
         user = build :user
         expect {
-          Event.log 'scan', user
+          Event.log 'registration', user
         }.to change{ Event.count }.by(1)
       end
     end
@@ -27,9 +27,9 @@ describe Event do
     context "if the event exists" do
       it "does not create a new event" do
         user = build :user
-        create :event, :scan, user: user
+        create :event, :registration, user: user
         expect {
-          Event.log 'scan', user
+          Event.log 'registration', user
         }.to change{ Event.count }.by(0)
       end
     end
@@ -38,7 +38,7 @@ describe Event do
   describe "log_without_user" do
     it "creates a new event" do
       expect {
-        Event.log_without_user 'scan', '200.10.20.30'
+        Event.log_without_user 'landing', '200.10.20.30'
       }.to change{ Event.count }.by(1)
     end
   end

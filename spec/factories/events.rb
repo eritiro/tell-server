@@ -15,12 +15,16 @@ FactoryGirl.define do
       event_type "registration"
     end
 
-    trait :scan do
-      event_type "scan"
+    trait :search do
+      event_type "search"
     end
 
-    trait :comment do
-      event_type "comment"
+    trait :attend do
+      event_type "attend"
+    end
+
+    trait :chat do
+      event_type "chat"
     end
   end
 end
