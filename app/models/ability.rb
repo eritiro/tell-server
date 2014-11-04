@@ -5,7 +5,7 @@ class Ability
     if user.admin?
       can :manage, :all
     else
-      can [:show, :attend] , Location
+      can [:read, :attend], Location
     end
   end
 end
