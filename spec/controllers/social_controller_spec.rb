@@ -29,6 +29,18 @@ describe SocialController do
         put :facebook, {format: :json, token: "abc"}
         assigns(:user).should be_a(User)
       end
+
+      describe ".json" do
+        render_views
+        let(:json) { JSON.parse(response.body) }
+
+        it "returns username" do
+          put :facebook, {format: :json, token: "abc"}
+          json['username'].should eq "pomelo"
+          json['id'].should be_present
+          json['authentication_token'].should be_present
+        end
+      end
     end
 
     context "with invalid credentials" do
@@ -72,20 +84,22 @@ describe SocialController do
         "gender" => "male",
         "birthday" => "08/04/1985"
       }
+
+      @photos = [{ 'source' => 'http://www.totpi.com/wp-content/uploads/2014/03/020212340.jpg'}]
     end
 
     context "without existing user" do
       it "creates a new user" do
-        expect { subject.send(:find_or_create_user, @me) }.to change(User, :count).by(1)
+        expect { subject.send(:find_or_create_user, @me, @photos) }.to change(User, :count).by(1)
       end
 
       it "creates a new registration event" do
-        expect { subject.send(:find_or_create_user, @me) }.to change(Event, :count).by(1)
+        expect { subject.send(:find_or_create_user, @me, @photos) }.to change(Event, :count).by(1)
         Event.last.event_type.should eq('registration')
       end
 
       it "returns a new user with email and stuff" do
-        user = subject.send(:find_or_create_user, @me)
+        user = subject.send(:find_or_create_user, @me, @photos)
         user.email.should eq(@me['email'])
         user.username.should eq(@me['name'])
         user.identities.first.uid.should eq(@me['id'])
@@ -103,7 +117,7 @@ describe SocialController do
         end
 
         it "returns a new user with email and stuff" do
-          user = subject.send(:find_or_create_user, @me)
+          user = subject.send(:find_or_create_user, @me, @photos)
           user.email.should be_present
           user.username.should eq(@me['name'])
           user.gender.should eq('male')
@@ -111,6 +125,13 @@ describe SocialController do
 
           user.identities.first.uid.should eq(@me['id'])
           user.identities.first.provider.should eq('facebook')
+        end
+
+        it "creates user_photos" do
+          user = subject.send(:find_or_create_user, @me, @photos)
+          user.reload
+          user.user_photos.count.should eq 1
+          user.user_photos[0].url.should eq @photos[0]["source"]
         end
       end
     end
@@ -121,12 +142,12 @@ describe SocialController do
       end
 
       it "adds an identity to the user" do
-        subject.send(:find_or_create_user, @me)
+        subject.send(:find_or_create_user, @me, @photos)
         @user.reload.identities.first.uid.should eq(@me['id'])
       end
 
       it "does not create a new event" do
-        expect { subject.send(:find_or_create_user, @me) }.to change(Event, :count).by(0)
+        expect { subject.send(:find_or_create_user, @me, @photos) }.to change(Event, :count).by(0)
       end
 
       context "and existing identity" do
@@ -134,10 +155,10 @@ describe SocialController do
           create :identity, user: @user, provider: 'facebook', uid: @me['id']
         end
 
-        it { expect { subject.send(:find_or_create_user, @me) }.to change(Identity, :count).by(0) }
+        it { expect { subject.send(:find_or_create_user, @me, @photos) }.to change(Identity, :count).by(0) }
 
         it "returns the user" do
-          subject.send(:find_or_create_user, @me).should eq @user
+          subject.send(:find_or_create_user, @me, @photos).should eq @user
         end
       end
     end
