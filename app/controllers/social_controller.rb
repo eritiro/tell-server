@@ -39,7 +39,7 @@ private
 
       if user.nil?
         user = User.new(
-          guessed_username: me["name"],
+          username: me["name"],
           email: email,
           gender:  me["gender"],
           birthday: Date.strptime(me["birthday"], "%m/%d/%Y"),

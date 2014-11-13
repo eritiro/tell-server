@@ -87,7 +87,7 @@ describe SocialController do
       it "returns a new user with email and stuff" do
         user = subject.send(:find_or_create_user, @me)
         user.email.should eq(@me['email'])
-        user.guessed_username.should eq(@me['name'])
+        user.username.should eq(@me['name'])
         user.identities.first.uid.should eq(@me['id'])
         user.identities.first.provider.should eq('facebook')
       end
@@ -105,7 +105,7 @@ describe SocialController do
         it "returns a new user with email and stuff" do
           user = subject.send(:find_or_create_user, @me)
           user.email.should be_present
-          user.guessed_username.should eq(@me['name'])
+          user.username.should eq(@me['name'])
           user.gender.should eq('male')
           user.birthday.should eq Date.new(1985, 8, 4)
 

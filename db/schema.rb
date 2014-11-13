@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104224801) do
+ActiveRecord::Schema.define(version: 20141113001430) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(version: 20141104224801) do
     t.datetime "picture_updated_at"
     t.string   "authentication_token"
     t.boolean  "admin",                  default: false, null: false
-    t.string   "guessed_username"
     t.boolean  "completed_tutorial",     default: false
     t.string   "gender"
     t.date     "birthday"
