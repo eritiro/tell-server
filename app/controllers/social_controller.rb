@@ -37,7 +37,7 @@ private
 
       if user.nil?
         user = User.new(
-          username: me["name"],
+          username: me["first_name"],
           email: email,
           gender:  me["gender"],
           birthday: Date.strptime(me["birthday"], "%m/%d/%Y"),
