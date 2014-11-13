@@ -6,13 +6,14 @@ class SocialController < ApplicationController
     OpenSSL::SSL::SSLContext::DEFAULT_PARAMS[:ssl_version] = "SSLv23"
     @graph = Koala::Facebook::API.new(params[:token])
 
-    @me, @photos = @graph.batch do |batch_api|
+    @me, @photos, @profile_picture = @graph.batch do |batch_api|
       batch_api.get_object('me')
-      batch_api.get_connections('me', 'photos', :fields=>"source")
+      batch_api.get_connections('me', 'photos', fields: "source")
+      batch_api.get_picture('me', type: 'large')
     end
 
     @me['device_token'] = params[:device_token]
-    @user = find_or_create_user(@me, @photos)
+    @user = find_or_create_user(@me, @photos, @profile_picture)
 
   rescue Koala::Facebook::AuthenticationError
     access_denied
@@ -28,7 +29,7 @@ class SocialController < ApplicationController
 
 private
 
-  def find_or_create_user(me, photos)
+  def find_or_create_user(me, photos, profile_picture)
     identity = Identity.find_or_create_by(uid: me["id"], provider: "facebook")
     user = identity.user
     if user.nil?
@@ -44,6 +45,9 @@ private
           password: Devise.friendly_token[0,20],
           device_token:  me["device_token"]
         )
+
+        user.picture = URI.parse(profile_picture) if profile_picture.present?
+
         user.user_photos << photos.map { |photo| UserPhoto.new(url: photo["source"]) }
 
         user.save!
