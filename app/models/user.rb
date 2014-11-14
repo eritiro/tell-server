@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :identities, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :user_photos, dependent: :destroy
-  belongs_to :location
+  belongs_to :location, inverse_of: :attendees
 
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates_inclusion_of :gender, in: ['male', 'female']
