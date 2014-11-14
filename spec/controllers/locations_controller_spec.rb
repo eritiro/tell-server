@@ -25,6 +25,7 @@ describe LocationsController do
 
       describe '.json' do
         render_views
+        include ApplicationHelper
         let(:json) { JSON.parse(response.body) }
 
         it "renders json" do
@@ -33,7 +34,7 @@ describe LocationsController do
           json.first["name"].should eq location.name
           json.first["address"].should eq location.address
           json.first["phone"].should eq location.phone
-          json.first["photo"].should eq location.photo.url(:thumb)
+          json.first["photo"].should eq absolute_url(location.photo.url(:thumb))
         end
       end
     end
