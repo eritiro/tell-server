@@ -1,5 +1,4 @@
 TellServer::Application.routes.draw do
-
   root to: 'pages#index'
   post '/land', to: 'pages#land'
 
@@ -9,6 +8,7 @@ TellServer::Application.routes.draw do
   put '/users/photo_select', to: 'social#photo_select'
 
   resources :users, except: [:new, :create] do
+    resources :messages
     member do
       post :notify
     end

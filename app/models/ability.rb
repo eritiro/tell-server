@@ -6,6 +6,7 @@ class Ability
       can :manage, :all
     else
       can [:read, :attend, :leave], Location
+      can :manage, Message
     end
   end
 end
