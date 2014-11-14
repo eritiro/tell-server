@@ -1,4 +1,4 @@
-json.array!(@attendees) do |attendee|
-  json.extract! attendee, :id
-  json.url attendee_url(attendee, format: :json)
+json.array!(@users) do |user|
+  json.extract! user, :id, :username, :gender
+  json.picture absolute_url(user.picture.url(:thumb))
 end
