@@ -23,6 +23,10 @@ class MessagesController < ApplicationController
   def create
     @message = @user.received_messages.new(text: message_params["text"], from: current_user)
     @message.save
+    if @user.device_token.present?
+      GCM.send_notification @user.device_token, { message: @message.text, title: "#{current_user} te envió un mensaje" }
+    end
+
     respond_with([@user, @message])
   end
 
