@@ -25,12 +25,15 @@ describe LocationsController do
 
       describe '.json' do
         render_views
+        let(:json) { JSON.parse(response.body) }
 
         it "renders json" do
           location = create(:location)
           get :index, format: "json"
-          response.body.should include(location.name)
-          response.body.should include(location.address)
+          json.first["name"].should eq location.name
+          json.first["address"].should eq location.address
+          json.first["phone"].should eq location.phone
+          json.first["photo"].should eq location.photo.url(:thumb)
         end
       end
     end
