@@ -8,6 +8,7 @@
 
 User.create(email: "admin@startmeapps.com", username: "admin", password: "1234", admin: true)
 
+Location.destroy_all
 Location.create(name: 'ACQUA LOUNGE', address: 'Juana Manso 305 PB', capacity: 214)
 Location.create(name: 'AMERIKA', address: 'Gascon 1036', capacity: 2450)
 Location.create(name: 'AMNESIA', address: 'Av. Nazca 55', capacity: 778)
