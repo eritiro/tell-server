@@ -1,4 +1,4 @@
 json.array!(@messages) do |message|
-  json.extract! message, :id, :from_id, :to_id, :text
-  json.url message_url(message, format: :json)
+  json.extract! message, :id, :text, :created_at
+  json.mine message.from == current_user
 end

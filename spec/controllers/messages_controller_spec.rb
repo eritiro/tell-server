@@ -29,6 +29,32 @@ describe MessagesController do
       get :index, user_id: friend.to_param
       assigns(:messages).should_not include(message)
     end
+
+    describe ".json" do
+      render_views
+      include ApplicationHelper
+      let(:json) { JSON.parse(response.body) }
+
+      it "renders current user messages" do
+        message = create :message, from: current_user, to: friend
+        get :index, user_id: friend.to_param, format: :json
+
+        json.first["id"].should eq message.id
+        json.first["text"].should eq message.text
+        json.first["mine"].should be_true
+        json.first["created_at"].should eq message.reload.created_at.as_json
+      end
+
+      it "renders friend messages" do
+        message = create :message, from: friend, to: current_user
+        get :index, user_id: friend.to_param, format: :json
+
+        json.first["id"].should eq message.id
+        json.first["text"].should eq message.text
+        json.first["mine"].should be_false
+        json.first["created_at"].should eq message.reload.created_at.as_json
+      end
+    end
   end
 
   describe "GET show" do
