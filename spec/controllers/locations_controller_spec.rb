@@ -170,21 +170,4 @@ describe LocationsController do
       end
     end
   end
-
-  context "regular user" do
-    before do
-      @current_user = create :user
-      sign_in @current_user
-    end
-
-    describe "PUT attend" do
-      describe "with valid params" do
-        it "updates the requested location" do
-          location = create(:location)
-          put :attend, id: location.to_param, format: :json
-          @current_user.reload.location.should eq location
-        end
-      end
-    end
-  end
 end

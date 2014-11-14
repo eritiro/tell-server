@@ -15,9 +15,10 @@ TellServer::Application.routes.draw do
   end
   resources :versions
   resources :locations do
-    member do
-      put :attend
-    end
+    resources :attendees, only: :index
   end
+  put 'locations/:location_id/attendees', to: 'attendees#attend'
+  delete 'locations/:location_id/attendees', to: 'attendees#leave'
+
   get 'metrics', to: 'metrics#index'
 end
