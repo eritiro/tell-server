@@ -115,6 +115,13 @@ describe MessagesController do
       post :create, {:message => attributes_for(:message), user_id: friend.to_param}
       response.should redirect_to([friend, Message.last])
     end
+
+    describe ".json" do
+      it "shows no content" do
+        post :create, {:message => attributes_for(:message), user_id: friend.to_param, format: :json }
+        response.status.should eq 204
+      end
+    end
   end
 
   describe "PUT update" do

@@ -30,7 +30,10 @@ class MessagesController < ApplicationController
       title: "#{current_user} te envió un mensaje",
       type: "message")
 
-    respond_with([@user, @message])
+    respond_to do |format|
+      format.html { redirect_to [@user, @message] }
+      format.json { head :no_content }
+    end
   end
 
   def update
