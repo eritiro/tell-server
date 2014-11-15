@@ -51,6 +51,18 @@ describe UsersController do
       get :show, {:id => user.to_param}
       assigns(:user).should eq(user)
     end
+
+    describe ".json" do
+      render_views
+      include ApplicationHelper
+      let(:json) { JSON.parse(response.body) }
+
+      it "returns the user image" do
+        user = create :user
+        get :show, id: user.to_param, format: :json
+        json["picture"].should eq absolute_url(user.picture.url(:original))
+      end
+    end
   end
 
   describe "GET edit" do

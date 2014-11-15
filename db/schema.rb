@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114211016) do
+ActiveRecord::Schema.define(version: 20141115191347) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -56,6 +56,18 @@ ActiveRecord::Schema.define(version: 20141114211016) do
 
   add_index "messages", ["from_id"], name: "index_messages_on_from_id", using: :btree
   add_index "messages", ["to_id"], name: "index_messages_on_to_id", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.string   "type"
+    t.integer  "from_id"
+    t.integer  "to_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["from_id"], name: "index_notifications_on_from_id", using: :btree
+  add_index "notifications", ["to_id"], name: "index_notifications_on_to_id", using: :btree
 
   create_table "user_photos", force: true do |t|
     t.string   "url"

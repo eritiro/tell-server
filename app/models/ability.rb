@@ -7,6 +7,8 @@ class Ability
     else
       can [:read, :attend, :leave], Location
       can :manage, Message
+      can :show, User
+      can :index, Notification
     end
   end
 end

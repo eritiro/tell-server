@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :events, dependent: :destroy
   has_many :user_photos, dependent: :destroy
   has_many :received_messages, class_name: "Message", foreign_key: "to_id", dependent: :destroy
+  has_many :notifications, foreign_key: "to_id"
   belongs_to :location, inverse_of: :attendees
 
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/

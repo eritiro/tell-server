@@ -21,4 +21,8 @@ TellServer::Application.routes.draw do
   delete 'locations/:location_id/attendees', to: 'attendees#leave'
 
   get 'metrics', to: 'metrics#index'
+
+
+  resources :notifications, only: :index
+
 end
