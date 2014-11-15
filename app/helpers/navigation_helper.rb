@@ -8,6 +8,7 @@ module NavigationHelper
     add_item items, :location
     add_item items, :user
     add_item items, :version
+    add_item items, :notification
 
     items
   end

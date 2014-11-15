@@ -21,6 +21,19 @@ class User < ActiveRecord::Base
     username
   end
 
+  def notify attributes
+    notifications.where(from_id: attributes[:from].id, type: attributes[:type]).destroy_all
+    notification = notifications.create(attributes)
+    if device_token.present?
+      GCM.send_notification device_token, {
+        title: notification.title,
+        message: notification.text,
+        type: notification.type,
+        from_id: notification.from_id
+      }
+    end
+  end
+
 private
 
   def ensure_authentication_token

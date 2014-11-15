@@ -101,8 +101,7 @@ describe MessagesController do
 
     it "notifies friend" do
       text = "hello"
-      friend.update(device_token: "something valid")
-      GCM.should_receive(:send_notification).with(friend.device_token, { message: text, title: "#{current_user} te envió un mensaje" })
+      User.any_instance.should_receive(:notify).with({ text: text, title: "#{current_user} te envió un mensaje", type: "message", from: current_user })
       post :create, {:message => attributes_for(:message, text: text ), user_id: friend.to_param}
     end
 

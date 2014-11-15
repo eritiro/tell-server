@@ -5,5 +5,5 @@ class Notification < ActiveRecord::Base
   validates_presence_of :from, :to, :type
   self.inheritance_column = :pomelo_rocks
 
-  default_scope order('id DESC')
+  default_scope { order('id DESC') }
 end
