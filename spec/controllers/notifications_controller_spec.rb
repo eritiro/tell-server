@@ -17,5 +17,22 @@ describe NotificationsController do
       get :index
       assigns(:notifications).should_not include notification
     end
+
+    describe ".json" do
+      render_views
+      include ApplicationHelper
+      let(:json) { JSON.parse(response.body) }
+
+      it "renders current user messages" do
+        notification = create(:notification, to: current_user)
+        get :index, format: :json
+
+        json.first["id"].should eq notification.id
+        json.first["text"].should eq notification.text
+        json.first["type"].should eq notification.type
+        json.first["from_id"].should eq notification.from_id
+        json.first["created_at"].should eq notification.reload.created_at.as_json
+      end
+    end
   end
 end
