@@ -23,5 +23,8 @@ describe UsersController do
       delete("/users/1").should route_to("users#destroy", :id => "1")
     end
 
+    it "routes to #update" do
+      post("/users/1/invite").should route_to("users#invite", :id => "1")
+    end
   end
 end

@@ -132,4 +132,13 @@ describe UsersController do
     end
   end
 
+  describe "POST invite" do
+    before { sign_in create(:user) }
+
+    it "notifies user" do
+      user = create :user
+      User.any_instance.should_receive(:notify)
+      post :invite, id: user.to_param
+    end
+  end
 end

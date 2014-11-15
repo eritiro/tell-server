@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :notify]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :invite]
 
   # GET /users
   # GET /users.json
@@ -71,8 +71,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def notify
-    GCM.send_notification @user.device_token, { message: 'A donde vas a ir esta noche?', title: "Hola #{@user.username}" }
+  def invite
+    @user.notify(
+      from: current_user,
+      text: "#{current_user} te invitó un trago. Reclamaselo esta noche!!",
+      title: "#{current_user} te invitó un trago",
+      type: "invite")
 
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully notified.' }
@@ -80,14 +84,14 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :email, :password, :picture, :admin, :gender)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :picture, :admin, :gender)
+  end
 end

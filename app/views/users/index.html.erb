@@ -29,7 +29,7 @@
         <td><%= user.email %></td>
         <td><%= user.admin %></td>
         <td><%= user.identities.map(&:provider).join(', ') %></td>
-        <td><%= link_to 'Notify', notify_user_path(user), method: :post if user.device_token %></td>
+        <td><%= link_to 'Invite', invite_user_path(user), method: :post %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
