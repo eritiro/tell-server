@@ -30,6 +30,12 @@ describe MessagesController do
       assigns(:messages).should_not include(message)
     end
 
+    it "does not include messages to oneself" do
+      message = create :message, from: current_user, to: current_user
+      get :index, user_id: friend.to_param
+      assigns(:messages).should_not include(message)
+    end
+
     describe ".json" do
       render_views
       include ApplicationHelper

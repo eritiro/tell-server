@@ -45,7 +45,9 @@ class MessagesController < ApplicationController
 
 private
   def scoped_messages
-    Message.where(from_id: [current_user, @user], to_id: [current_user, @user])
+    Message.where("(from_id = ? and to_id = ?) or (from_id = ? and to_id = ?)",
+      current_user, @user,
+      @user, current_user)
   end
 
   def set_user
