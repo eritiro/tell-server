@@ -46,8 +46,11 @@ describe UsersController do
   end
 
   describe "GET show" do
+    let(:current_user){ create :user }
+    let(:user) { create :user }
+
+    before { sign_in current_user }
     it "assigns the requested user as @user" do
-      user = create :user
       get :show, {:id => user.to_param}
       assigns(:user).should eq(user)
     end
@@ -58,9 +61,23 @@ describe UsersController do
       let(:json) { JSON.parse(response.body) }
 
       it "returns the user image" do
-        user = create :user
         get :show, id: user.to_param, format: :json
         json["picture"].should eq absolute_url(user.picture.url(:original))
+      end
+
+      context "without invitation" do
+        it "returns that the user was not invited" do
+          get :show, id: user.to_param, format: :json
+          json["was_invited"].should be_false
+        end
+      end
+
+      context "with invitation" do
+        it "returns that the user was invited" do
+          create :notification, from: current_user, to: user, type: 'invite'
+          get :show, id: user.to_param, format: :json
+          json["was_invited"].should be_true
+        end
       end
     end
   end
