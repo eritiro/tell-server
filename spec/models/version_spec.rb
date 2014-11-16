@@ -14,14 +14,14 @@ describe Version do
       user = create(:user)
       Timecop.travel(1.minute.from_now)
       version = create(:version)
-      create_list(:event, 2, :search, user: user)
+      create_list(:event, 2, :attend, user: user)
       version.events.count.should eq 0
     end
 
     it "ignores administrators" do
       version = create(:version)
       admin = create(:admin)
-      create(:event, :search, user: admin)
+      create(:event, :attend, user: admin)
       version.events.count.should eq 0
     end
 
@@ -31,7 +31,7 @@ describe Version do
         user = create(:user)
         Timecop.travel(1.minute.from_now)
         create(:version)
-        create(:event, :search, user: user)
+        create(:event, :attend, user: user)
 
         version.events.count.should eq 0
       end

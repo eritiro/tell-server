@@ -9,6 +9,7 @@ class AttendeesController < ApplicationController
 
   def attend
     @location.attendees << current_user
+    Event.log 'attend', current_user
     head :no_content
   end
 

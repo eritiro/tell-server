@@ -111,6 +111,11 @@ describe MessagesController do
       post :create, {:message => attributes_for(:message, text: text ), user_id: friend.to_param}
     end
 
+    it "logs the event" do
+      Event.should_receive(:log).with('chat', current_user)
+      post :create, {:message => attributes_for(:message), user_id: friend.to_param}
+    end
+
     it "redirects to the created message" do
       post :create, {:message => attributes_for(:message), user_id: friend.to_param}
       response.should redirect_to([friend, Message.last])

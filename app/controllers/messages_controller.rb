@@ -30,6 +30,8 @@ class MessagesController < ApplicationController
       title: "#{current_user} te envió un mensaje",
       type: "message")
 
+    Event.log 'chat', current_user
+
     respond_to do |format|
       format.html { redirect_to [@user, @message] }
       format.json { head :no_content }

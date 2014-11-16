@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe AttendeesController do
   let(:current_user){ create(:user) }
+  let(:location){ create(:location) }
   before { sign_in current_user }
 
   describe "GET index" do
     it "assigns all location attendees as @users" do
-      location = create :location
       location.attendees << create(:user)
       get :index, location_id: location.id
       assigns(:users).should eq location.attendees
@@ -19,7 +19,6 @@ describe AttendeesController do
 
       it "renders users attributes" do
         user = create(:user)
-        location = create(:location)
         location.attendees << user
         get :index, location_id: location, format: "json"
 
@@ -33,15 +32,18 @@ describe AttendeesController do
 
   describe "PUT attend" do
     it "adds current_user to location attendees" do
-      location = create :location
       put :attend, location_id: location.id
       location.attendees.should include(current_user)
+    end
+
+    it "logs the event" do
+      Event.should_receive(:log).with('attend', current_user)
+      put :attend, location_id: location.id
     end
   end
 
   describe "DELETE leave" do
     it "removes current_user from location attendees" do
-      location = create :location
       location.attendees << current_user
 
       delete :leave, location_id: location.id

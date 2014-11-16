@@ -19,14 +19,13 @@ describe MetricsController do
       it "counts TYPES" do
         create :version
 
-        create_list :event, 5, :landing
-        create_list :event, 4, :registration
-        create_list :event, 3, :search
+        create_list :event, 4, :landing
+        create_list :event, 3, :registration
         create_list :event, 2, :attend
         create_list :event, 1, :chat
 
         get :index, {}
-        assigns(:events).map{|event| event[:values] }.should eq [[100], [80], [60], [40], [20]]
+        assigns(:events).map{|event| event[:values] }.should eq [[100], [75], [50], [25]]
       end
     end
   end

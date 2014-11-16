@@ -15,10 +15,6 @@ FactoryGirl.define do
       event_type "registration"
     end
 
-    trait :search do
-      event_type "search"
-    end
-
     trait :attend do
       event_type "attend"
     end
