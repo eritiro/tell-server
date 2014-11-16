@@ -6,7 +6,13 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     @user = User.find(current_user.id)
 
-    if @user.update_without_password(devise_parameter_sanitizer.sanitize(:account_update))
+    successfully_updated = if params[:user][:current_password]
+      @user.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
+    else
+      @user.update_without_password(devise_parameter_sanitizer.sanitize(:account_update))
+    end
+
+    if successfully_updated
       sign_in @user, :bypass => true
       respond_with @user, location: after_update_path_for(resource)
     else

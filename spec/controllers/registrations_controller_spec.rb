@@ -21,6 +21,13 @@ describe RegistrationsController do
           put :update, { :user => { username: "suelopoder", completed_tutorial: "true" } }
         end
 
+        describe "changing the password" do
+          it "updates the requested user" do
+            User.any_instance.should_receive(:update_with_password).with({ 'username' => 'suelopoder', 'current_password' => '1234' })
+            put :update, { :user => { username: "suelopoder", current_password: "1234" } }
+          end
+        end
+
         it "does not mess up with events" do
           Event.should_not_receive(:log)
           put :update, { :user => attributes_for(:user) }
