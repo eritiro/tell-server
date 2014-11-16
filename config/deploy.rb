@@ -1,4 +1,4 @@
-require "bundler/capistrano" 
+require "bundler/capistrano"
 require "rvm/capistrano"  # Load RVM's capistrano plugin.
 
 set :rvm_type, :system
@@ -19,7 +19,7 @@ set :deploy_to, '/deployment/tell-server'
 
 # keeps track of the last 5 releases
 set :keep_releases, 5
-after "deploy:restart", "deploy:cleanup" 
+after "deploy:restart", "deploy:cleanup"
 
 # creates dirs, if it's needed
 before "deploy", "deploy:setup"
@@ -67,3 +67,5 @@ namespace :deploy do
     CMD
   end
 end
+
+load 'lib/deploy/seed'
