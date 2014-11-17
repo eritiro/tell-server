@@ -9,6 +9,9 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
+  <div><%= f.label :gender %><br />
+  <%= f.select :gender, ['male', 'female'] %></div>
+
   <div><%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %></div>
 

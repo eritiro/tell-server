@@ -41,6 +41,7 @@ describe SocialController do
           json['username'].should eq "pomelo"
           json['id'].should be_present
           json['authentication_token'].should be_present
+          json['unread_notifications'].should eq 0
         end
       end
     end
