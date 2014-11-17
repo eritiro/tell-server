@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
         title: notification.title,
         message: notification.text,
         type: notification.type,
-        from_id: notification.from_id
+        from_id: notification.from_id,
+        unread: notifications.unread.count
       }
     end
   end

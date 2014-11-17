@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115204918) do
+ActiveRecord::Schema.define(version: 20141116233137) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20141115204918) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+    t.boolean  "read",       default: false
   end
 
   add_index "notifications", ["from_id"], name: "index_notifications_on_from_id", using: :btree

@@ -10,4 +10,5 @@ class Notification < ActiveRecord::Base
   self.inheritance_column = :pomelo_rocks
 
   default_scope { order('id DESC') }
+  scope :unread, -> { where(read: false) }
 end

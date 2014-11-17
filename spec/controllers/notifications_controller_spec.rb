@@ -12,10 +12,16 @@ describe NotificationsController do
       assigns(:notifications).should eq [last_notification, first_notification]
     end
 
-    it "does not includes notifications to other users" do
+    it "does not includes notifications for other users" do
       notification = create(:notification)
       get :index
       assigns(:notifications).should_not include notification
+    end
+
+    it "marks notifications as read" do
+      notification = create(:notification, to: current_user)
+      get :index
+      notification.reload.read.should be_true
     end
 
     describe ".json" do
@@ -32,6 +38,7 @@ describe NotificationsController do
         json.first["type"].should eq notification.type
         json.first["from_id"].should eq notification.from_id
         json.first["created_at"].should eq notification.reload.created_at.as_json
+        json.first["read"].should eq false
       end
     end
   end

@@ -63,7 +63,8 @@ describe User do
         message: "Hello",
         title: "Title",
         type: "message",
-        from_id: sender.id })
+        from_id: sender.id,
+        unread: 1 })
       user.notify(from: sender, text: "Hello", title: "Title", type: "message")
     end
   end
