@@ -1,4 +1,4 @@
 json.array!(@users) do |user|
   json.extract! user, :id, :username, :gender
-  json.picture absolute_url(user.picture.url(:thumb))
+  json.picture absolute_url(user.picture.url(:medium))
 end

@@ -4,7 +4,7 @@ defaults: &DEFAULTS
     domain: startmeapps.com
 development:
   <<: *DEFAULTS
-  host: 192.168.0.6:3000
+  host: 192.168.0.167:3000
 
 test:
   <<: *DEFAULTS

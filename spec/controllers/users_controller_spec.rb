@@ -62,7 +62,15 @@ describe UsersController do
 
       it "returns the user image" do
         get :show, id: user.to_param, format: :json
-        json["picture"].should eq absolute_url(user.picture.url(:original))
+        json["picture"].should eq absolute_url(user.picture.url(:medium))
+      end
+
+      it "returns they location" do
+        location = create(:location)
+        user = create(:user, location: location)
+        get :show, id: user.to_param, format: :json
+        json["location"]["id"].should eq location.id
+        json["location"]["name"].should eq location.name
       end
 
       context "without invitation" do
