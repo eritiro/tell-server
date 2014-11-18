@@ -26,11 +26,12 @@ class User < ActiveRecord::Base
     notification = notifications.create(attributes)
     if device_token.present?
       GCM.send_notification device_token, {
+        id: notification.id,
         title: notification.title,
         message: notification.text,
         type: notification.type,
         from_id: notification.from_id,
-        unread: notifications.unread.count
+        msgcnt: notifications.unread.count
       }
     end
   end

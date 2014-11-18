@@ -36,12 +36,11 @@ describe SocialController do
         render_views
         let(:json) { JSON.parse(response.body) }
 
-        it "returns username" do
+        it "returns user attributes" do
           put :facebook, {format: :json, token: "abc"}
           json['username'].should eq "pomelo"
           json['id'].should be_present
           json['authentication_token'].should be_present
-          json['unread_notifications'].should eq 0
         end
       end
     end

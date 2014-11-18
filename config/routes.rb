@@ -4,6 +4,7 @@ TellServer::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
 
+  get '/users/profile', to: 'users#profile'
   put '/users/facebook', to: 'social#facebook'
   put '/users/photo_select', to: 'social#photo_select'
 

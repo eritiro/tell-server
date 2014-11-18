@@ -59,12 +59,7 @@ describe User do
     it "pushes a notification to the device" do
       user = create(:user, device_token: "valid_token")
       sender = create(:user)
-      GCM.should_receive(:send_notification).with(user.device_token, {
-        message: "Hello",
-        title: "Title",
-        type: "message",
-        from_id: sender.id,
-        unread: 1 })
+      GCM.should_receive(:send_notification)
       user.notify(from: sender, text: "Hello", title: "Title", type: "message")
     end
   end

@@ -158,4 +158,19 @@ describe UsersController do
       post :invite, id: user.to_param
     end
   end
+
+  describe "GET profile" do
+    before { sign_in create(:user) }
+
+    describe ".json" do
+      render_views
+      include ApplicationHelper
+      let(:json) { JSON.parse(response.body) }
+
+      it "returns the number of unread notifications" do
+        get :profile, format: :json
+        json["unread_notifications"].should eq 0
+      end
+    end
+  end
 end

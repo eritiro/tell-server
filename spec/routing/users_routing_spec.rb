@@ -26,5 +26,9 @@ describe UsersController do
     it "routes to #update" do
       post("/users/1/invite").should route_to("users#invite", :id => "1")
     end
+
+    it "routes to #profile" do
+      get("/users/profile").should route_to("users#profile")
+    end
   end
 end

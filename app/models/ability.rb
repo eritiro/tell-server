@@ -7,7 +7,7 @@ class Ability
     else
       can [:read, :attend, :leave], Location
       can :manage, Message
-      can [:show, :invite], User
+      can [:show, :invite, :profile], User
       can :index, Notification
     end
   end
