@@ -1,5 +1,6 @@
 TellServer::Application.routes.draw do
   root to: 'pages#index'
+  get '/app', to: 'pages#app'
   post '/land', to: 'pages#land'
 
   devise_for :users, :controllers => { :registrations => "registrations" }

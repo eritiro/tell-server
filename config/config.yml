@@ -1,4 +1,5 @@
 defaults: &DEFAULTS
+  download_link: https://play.google.com/store/apps/details?id=com.pomelo.tell
   mailing:
     api_key: key-9hwv5yr-a10nl7gebowlqxvgtiihu4x7
     domain: startmeapps.com
