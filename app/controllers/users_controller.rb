@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @invited = Notification.where(from: current_user, to: @user).count > 0
+    @invited = Notification.where(from: current_user, to: @user, type: 'invite').count > 0
   end
 
   # GET /users/new

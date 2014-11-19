@@ -78,6 +78,12 @@ describe UsersController do
           get :show, id: user.to_param, format: :json
           json["was_invited"].should be_false
         end
+
+        it "returns that the user was not invited even if they chat" do
+          create :notification, from: current_user, to: user, type: 'message'
+          get :show, id: user.to_param, format: :json
+          json["was_invited"].should be_false
+        end
       end
 
       context "with invitation" do
