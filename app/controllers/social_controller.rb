@@ -41,7 +41,7 @@ private
           username: me["first_name"],
           email: email,
           gender:  me["gender"],
-          birthday: Date.strptime(me["birthday"], "%m/%d/%Y"),
+#          birthday: Date.strptime(me["birthday"], "%m/%d/%Y"),
           password: Devise.friendly_token[0,20],
           device_token:  me["device_token"]
         )
