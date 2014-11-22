@@ -7,10 +7,6 @@ describe MessagesController do
       get("/users/1/messages").should route_to("messages#index", user_id: "1")
     end
 
-    it "routes to #new" do
-      get("/users/1/messages/new").should route_to("messages#new", user_id: "1")
-    end
-
     it "routes to #show" do
       get("/users/1/messages/2").should route_to("messages#show", user_id: "1", id: "2")
     end

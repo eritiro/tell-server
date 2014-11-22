@@ -5,15 +5,11 @@ class MessagesController < ApplicationController
 
   def index
     @messages = scoped_messages
+    @message = @user.received_messages.new
     respond_with(@messages)
   end
 
   def show
-    respond_with(@message)
-  end
-
-  def new
-    @message = @user.received_messages.new
     respond_with(@message)
   end
 
@@ -33,7 +29,7 @@ class MessagesController < ApplicationController
     Event.log 'chat', current_user
 
     respond_to do |format|
-      format.html { redirect_to [@user, @message] }
+      format.html { redirect_to user_messages_path(@user) }
       format.json { head :no_content }
     end
   end

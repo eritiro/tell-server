@@ -10,7 +10,7 @@ TellServer::Application.routes.draw do
   put '/users/photo_select', to: 'social#photo_select'
 
   resources :users, except: [:new, :create] do
-    resources :messages
+    resources :messages, except: [:new]
     member do
       post :invite
     end

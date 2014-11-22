@@ -71,13 +71,6 @@ describe MessagesController do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new message as @message" do
-      get :new, user_id: friend.to_param
-      assigns(:message).should be_a_new(Message)
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested message as @message" do
       message = create :message, from: current_user, to: friend
@@ -116,9 +109,9 @@ describe MessagesController do
       post :create, {:message => attributes_for(:message), user_id: friend.to_param}
     end
 
-    it "redirects to the created message" do
+    it "redirects to user messages" do
       post :create, {:message => attributes_for(:message), user_id: friend.to_param}
-      response.should redirect_to([friend, Message.last])
+      response.should redirect_to(user_messages_url(friend))
     end
 
     describe ".json" do
