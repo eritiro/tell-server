@@ -10,6 +10,11 @@
 </p>
 
 <p>
+  <strong>Alternative name:</strong>
+  <%= @location.alternative_name %>
+</p>
+
+<p>
   <strong>Address:</strong>
   <%= @location.address %>
 </p>
@@ -17,6 +22,11 @@
 <p>
   <strong>Phone:</strong>
   <%= @location.phone %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= simple_format @location.description %>
 </p>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |

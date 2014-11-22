@@ -55,13 +55,16 @@ describe LocationsController do
 
       describe '.json' do
         render_views
+        include ApplicationHelper
+        let(:json) { JSON.parse(response.body) }
 
         it "renders json" do
           location = create(:location)
           get :show, {:id => location.to_param, format: "json"}
-          response.body.should include(location.name)
-          response.body.should include(location.address)
-          response.body.should include("test.com" + location.photo.url(:medium))
+          json["name"].should eq location.name
+          json["address"].should eq location.address
+          json["photo"].should eq ("http://test.com" + location.photo.url(:medium))
+          json["description"].should eq location.description
         end
       end
     end
