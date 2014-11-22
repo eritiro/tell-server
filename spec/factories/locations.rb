@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :location do
-    name "FunnyPizza"
+    name "CrazyNight"
     address "102 Apple st."
     phone "1-101-1011"
     photo_file_name "location.jpeg"

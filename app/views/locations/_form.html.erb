@@ -16,6 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :alternative_name %><br>
+    <%= f.text_field :alternative_name %>
+  </div>
+  <div class="field">
     <%= f.label :photo %><br>
     <%= f.file_field :photo %>
   </div>
@@ -26,6 +30,10 @@
   <div class="field">
     <%= f.label :phone %><br>
     <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
   </div>
   <div class="actions">
     <%= f.submit nil, class: "btn btn-success" %>

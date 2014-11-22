@@ -23,6 +23,13 @@ describe LocationsController do
         assigns(:locations).should include(that_location)
       end
 
+      it "finds by alternative name" do
+        araos = create(:location, alternative_name: 'araos')
+        alamo = create(:location, alternative_name: 'alamo')
+        get :index, { name: 'ara' }
+        assigns(:locations).should include(araos)
+      end
+
       describe '.json' do
         render_views
         include ApplicationHelper

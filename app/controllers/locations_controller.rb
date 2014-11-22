@@ -6,7 +6,9 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.all
-    @locations = @locations.where("name like '%#{params['name']}%'") if params['name'].present?
+    if params['name'].present?
+      @locations = @locations.where("name like '%#{params['name']}%' or alternative_name like '%#{params['name']}%'")
+    end
   end
 
   # GET /locations/1
@@ -80,6 +82,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :address, :phone, :photo)
+      params.require(:location).permit(:name, :alternative_name, :address, :phone, :photo, :description)
     end
 end
