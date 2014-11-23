@@ -65,6 +65,7 @@ describe LocationsController do
           json["address"].should eq location.address
           json["photo"].should eq ("http://test.com" + location.photo.url(:medium))
           json["description"].should eq location.description
+          json["attendees"].should eq location.attendees.count
         end
       end
     end
