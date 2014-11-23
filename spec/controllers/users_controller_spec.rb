@@ -174,7 +174,8 @@ describe UsersController do
   end
 
   describe "GET profile" do
-    before { sign_in create(:user) }
+    let(:user) { create(:user) }
+    before { sign_in user }
 
     describe ".json" do
       render_views
@@ -184,6 +185,13 @@ describe UsersController do
       it "returns the number of unread notifications" do
         get :profile, format: :json
         json["unread_notifications"].should eq 0
+      end
+
+      it "returns the attending location id" do
+        attending_location = create(:location)
+        user.update(location_id: attending_location.id)
+        get :profile, format: :json
+        json["attending_location_id"].should eq attending_location.id
       end
     end
   end
