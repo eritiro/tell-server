@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = @user.received_messages.new(text: message_params["text"], from: current_user)
+    @message = @user.received_messages.new(text: message_params["text"][0, 255], from: current_user)
     @message.save!
 
     @user.notify(

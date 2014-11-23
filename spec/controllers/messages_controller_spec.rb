@@ -86,6 +86,17 @@ describe MessagesController do
       }.to change(Message, :count).by(1)
     end
 
+    context "with a very long text" do
+      let(:text){ "long" * 100 }
+
+      it "creates a message anyway" do
+        expect {
+          post :create, {:message => attributes_for(:message, text: text), user_id: friend.to_param}
+        }.to change(Message, :count).by(1)
+        Message.last.text.should start_with("long")
+      end
+    end
+
     it "assigns a newly created message as @message" do
       post :create, {:message => attributes_for(:message), user_id: friend.to_param}
       assigns(:message).should be_a(Message)
