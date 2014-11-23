@@ -11,4 +11,8 @@ class Notification < ActiveRecord::Base
 
   default_scope { order('id DESC') }
   scope :unread, -> { where(read: false) }
+
+  def unread
+    not read
+  end
 end

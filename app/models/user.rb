@@ -24,13 +24,14 @@ class User < ActiveRecord::Base
   def notify attributes
     notifications.where(from_id: attributes[:from].id, type: attributes[:type]).destroy_all
     notification = notifications.create(attributes)
-    if device_token.present?
+    if device_token.present? && notification.unread
       GCM.send_notification device_token, {
         id: notification.id,
         title: notification.title,
         message: notification.text,
         type: notification.type,
         from_id: notification.from_id,
+        read: notification.read,
         msgcnt: notifications.unread.count
       }
     end

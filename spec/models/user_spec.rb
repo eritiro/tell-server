@@ -62,6 +62,13 @@ describe User do
       GCM.should_receive(:send_notification)
       user.notify(from: sender, text: "Hello", title: "Title", type: "message")
     end
+
+    it "does not push a read notification" do
+      user = create(:user, device_token: "valid_token")
+      sender = create(:user)
+      GCM.should_not_receive(:send_notification)
+      user.notify(from: sender, text: "Hello", title: "Title", type: "message", read: true)
+    end
   end
 
   describe "on destroy" do

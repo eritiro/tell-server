@@ -26,6 +26,12 @@ class MessagesController < ApplicationController
       title: "#{current_user} te envió un mensaje",
       type: "message")
 
+    current_user.notify(
+      from: @user,
+      text: @message.text,
+      type: "message",
+      read: true)
+
     Event.log 'chat', current_user
 
     respond_to do |format|

@@ -98,10 +98,14 @@ describe MessagesController do
       assigns(:message).to.should eq(friend)
     end
 
-    it "notifies friend" do
+    it "notifies friend and user" do
       text = "hello"
-      User.any_instance.should_receive(:notify).with({ text: text, title: "#{current_user} te envió un mensaje", type: "message", from: current_user })
+      result = []
+      User.any_instance.stub(:notify){ |p| result << p }
       post :create, {:message => attributes_for(:message, text: text ), user_id: friend.to_param}
+      result.count.should eq 2
+      result.first.should eq({ text: text, title: "#{current_user} te envió un mensaje", type: "message", from: current_user })
+      result.last.should  eq({ text: text, type: "message", from: friend, read: true })
     end
 
     it "logs the event" do
