@@ -1,7 +1,6 @@
 class PagesController < ActionController::Base
 
   def index
-    @link = APP_CONFIG["download_link"]
   end
 
   def app
