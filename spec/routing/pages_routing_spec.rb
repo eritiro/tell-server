@@ -6,8 +6,8 @@ describe PagesController do
       get("/").should route_to("pages#index")
     end
 
-    it "routes to #land" do
-      post("/land").should route_to("pages#land")
+    it "routes to #privacy" do
+      get("/privacy").should route_to("pages#privacy")
     end
 
     it "routes to #app" do
