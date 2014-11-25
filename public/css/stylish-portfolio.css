@@ -10,7 +10,7 @@ html,
 body {
     width: 100%;
     height: 100%;
-		color: rgba(220,220,220, 0.8);
+		color: rgba(220,220,220, 0.9);
 }
 
 body {
@@ -21,7 +21,7 @@ body {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    padding-top: 170px; /* added to fit image */
+    padding-top: 180px; /* added to fit image */
 }
 
 .text-vertical-center h1 {

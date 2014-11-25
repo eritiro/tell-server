@@ -13,7 +13,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/stylish-portfolio.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/png" href="http://example.com/favicon.ico">
 </head>
 
 <body>
@@ -23,8 +22,15 @@
         <div class="text-vertical-center">
             <h3>Buenos Aires - 2015</h3>
             <br>
-            <a href="<%= app_path %>" class="btn btn-dark btn-lg">Descargar ahora</a>
+            <a id="download" href="<%= @link %>" class="btn btn-dark btn-lg">Descargar ahora</a>
         </div>
     </header>
+    <script type="text/javascript">
+      var anchor = document.getElementById("download");
+      anchor.onclick = function(){
+        window.location.href = "<%= app_path %>";
+        return false;
+      };
+    </script>
 </body>
 </html>
