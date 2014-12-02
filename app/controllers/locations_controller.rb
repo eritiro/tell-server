@@ -7,9 +7,12 @@ class LocationsController < ApplicationController
   def index
     @locations = Location.all
     if params['name'].present?
-      @locations = @locations.where("name like '%#{params['name']}%' or alternative_name like '%#{params['name']}%'")
+      priority = @locations.where("name like :name or alternative_name like :name", name: "#{params['name']}%").limit(5)
+      other_results = Location.where('name like :name or alternative_name like :name or description like :name', name: "%#{params['name']}%").limit(5)
+      other_results = other_results.reject{ |l| priority.include? l }
+
+      @locations = priority.concat(other_results)
     end
-    @locations = @locations.order("relevance desc")
   end
 
   # GET /locations/1

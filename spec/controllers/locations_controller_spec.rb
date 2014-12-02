@@ -11,23 +11,43 @@ describe LocationsController do
         assigns(:locations).should eq([location])
       end
 
-      it "excludes 'that' when searching for 'this'" do
-        that_location = create(:location, name: 'that')
-        get :index, { name: 'this' }
-        assigns(:locations).should_not include(that_location)
+      it "includes 'this' when searching for 'th'" do
+        this_location = create(:location, name: 'this')
+        get :index, { name: 'th' }
+        assigns(:locations).should include(this_location)
       end
 
-      it "includes 'that' when searching for 'th'" do
-        that_location = create(:location, name: 'that')
-        get :index, { name: 'th' }
-        assigns(:locations).should include(that_location)
+      it "excludes 'this' when searching for 'that'" do
+        this_location = create(:location, name: 'this')
+        get :index, { name: 'that' }
+        assigns(:locations).should_not include(this_location)
       end
 
       it "finds by alternative name" do
-        araos = create(:location, alternative_name: 'araos')
-        alamo = create(:location, alternative_name: 'alamo')
+        location = create(:location, alternative_name: 'araos')
         get :index, { name: 'ara' }
-        assigns(:locations).should include(araos)
+        assigns(:locations).should include(location)
+      end
+
+      describe "description search" do
+        it "finds by description name" do
+          location = create(:location, description: 'ubicado en palermo')
+          get :index, { name: 'palermo' }
+          assigns(:locations).should include(location)
+        end
+
+        it "puts matching names first" do
+          more_relevant = create(:location, name: 'palermo')
+          less_relevant = create(:location, description: 'ubicado en palermo')
+          get :index, { name: 'palermo' }
+          assigns(:locations).should eq([more_relevant, less_relevant])
+        end
+
+        it "avoids duplicates" do
+          location = create(:location, name: 'palermo', description: 'ubicado en palermo')
+          get :index, { name: 'palermo' }
+          assigns(:locations).should eq [location]
+        end
       end
 
       it "orders by relevance" do
