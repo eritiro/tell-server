@@ -1,6 +1,8 @@
 TellServer::Application.routes.draw do
   root to: 'pages#index'
-  get '/app', to: 'pages#app'
+  get '/download', to: 'pages#download'
+  get '/app',      to: 'pages#download'
+
   get '/privacy', to: 'pages#privacy'
 
   devise_for :users, :controllers => { :registrations => "registrations" }

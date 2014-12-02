@@ -10,8 +10,12 @@ describe PagesController do
       get("/privacy").should route_to("pages#privacy")
     end
 
-    it "routes to #app" do
-      get("/app").should route_to("pages#app")
+    it "app routes to #download" do
+      get("/app").should route_to("pages#download")
+    end
+
+    it "routes to #download" do
+      get("/download").should route_to("pages#download")
     end
   end
 end
