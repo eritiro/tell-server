@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122222831) do
+ActiveRecord::Schema.define(version: 20141202141826) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20141122222831) do
     t.integer  "capacity"
     t.text     "description"
     t.string   "alternative_name"
+    t.integer  "relevance"
   end
 
   create_table "messages", force: true do |t|

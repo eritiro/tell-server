@@ -30,6 +30,14 @@ describe LocationsController do
         assigns(:locations).should include(araos)
       end
 
+      it "orders by relevance" do
+        non_relevant = create(:location, relevance: 0)
+        relevant = create(:location, relevance: 1000)
+
+        get :index
+        assigns(:locations).should eq([relevant, non_relevant])
+      end
+
       describe '.json' do
         render_views
         include ApplicationHelper

@@ -9,6 +9,7 @@ class LocationsController < ApplicationController
     if params['name'].present?
       @locations = @locations.where("name like '%#{params['name']}%' or alternative_name like '%#{params['name']}%'")
     end
+    @locations = @locations.order("relevance desc")
   end
 
   # GET /locations/1
@@ -82,6 +83,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :alternative_name, :address, :phone, :photo, :description)
+      params.require(:location).permit(:name, :alternative_name, :address, :phone, :photo, :description, :capacity, :relevance)
     end
 end

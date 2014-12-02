@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Address</th>
-      <th>Phone</th>
+      <th>Relevance</th>
       <th>Photo</th>
       <th></th>
       <th></th>
@@ -18,7 +18,7 @@
       <tr>
         <td><%= location.name %></td>
         <td><%= location.address %></td>
-        <td><%= location.phone %></td>
+        <td><%= location.relevance %></td>
         <td><%= image_tag(location.photo.url(:thumb)) %></td>
         <td><%= link_to 'Show', location %></td>
         <td><%= link_to 'Edit', edit_location_path(location) %></td>
