@@ -61,3 +61,8 @@ body {
 .search-box .btn{
   margin-left: 5px;
 }
+
+tr[admin=true] .id{
+  font-weight: bold;
+  color: blue;
+}

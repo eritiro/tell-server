@@ -11,4 +11,10 @@ describe Location do
     location.attendees << user
     user.location.should eq location
   end
+
+  describe ".to_s" do
+    it "returns the name" do
+      build(:location, name: "test").to_s.should eq "test"
+    end
+  end
 end
