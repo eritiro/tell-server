@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
     find_or_create_by event_type: event_type, user: user
   end
 
-  def self.log_without_user event_type, ip
-    create! event_type: event_type, ip: ip
+  def self.log_without_user event_type, ip, user_agent
+    create! event_type: event_type, ip: ip, user_agent: user_agent
   end
 end

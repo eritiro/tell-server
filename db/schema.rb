@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202141826) do
+ActiveRecord::Schema.define(version: 20141202232651) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20141202141826) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "ip"
+    t.string   "user_agent"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
