@@ -29,9 +29,15 @@ describe LocationsController do
         assigns(:locations).should include(location)
       end
 
-      describe "description search" do
+      describe "secondary search" do
         it "finds by description name" do
           location = create(:location, description: 'ubicado en palermo')
+          get :index, { name: 'palermo' }
+          assigns(:locations).should include(location)
+        end
+
+        it "finds by address" do
+          location = create(:location, address: 'Santa Fe 123, palermo')
           get :index, { name: 'palermo' }
           assigns(:locations).should include(location)
         end
