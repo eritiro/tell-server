@@ -38,7 +38,7 @@ describe Event do
   describe "log_without_user" do
     it "creates a new event" do
       expect {
-        Event.log_without_user 'landing', '200.10.20.30'
+        Event.log_without_user 'landing', '200.10.20.30', 'agent'
       }.to change{ Event.count }.by(1)
     end
   end
