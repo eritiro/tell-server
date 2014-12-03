@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202232651) do
+ActiveRecord::Schema.define(version: 20141203160426) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 20141202232651) do
     t.text     "description"
     t.string   "alternative_name"
     t.integer  "relevance"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
   end
 
   create_table "messages", force: true do |t|

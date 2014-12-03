@@ -1,6 +1,6 @@
 json.array!(@locations) do |location|
   json.extract! location, :id, :name, :address, :phone
-  json.photo_thumb absolute_url(location.photo.url(:thumb))
+  json.thumb absolute_url(location.photo.url(:thumb)) if location.photo.exists?
 
   #deprecated
   json.photo absolute_url(location.photo.url(:thumb))

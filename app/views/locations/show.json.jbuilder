@@ -1,6 +1,6 @@
 json.extract! @location, :id, :name, :address, :phone, :description
-json.photo_thumb  absolute_url(@location.photo.url(:thumb))
-json.photo_medium absolute_url(@location.photo.url(:medium))
+json.thumb  absolute_url(@location.photo.url(:thumb)) if @location.photo.exists?
+json.banner absolute_url(@location.banner.url(:medium)) if @location.banner.exists?
 json.attendees @location.attendees.count
 
 # deprecated

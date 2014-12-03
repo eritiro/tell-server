@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <%= image_tag(@location.photo.url(:medium)) %>
+  <strong>Thumb:</strong><br/>
+  <%= image_tag(@location.photo.url(:thumb)) %>
 </p>
-
+<p>
+  <strong>Banner:</strong><br/>
+  <%= image_tag(@location.banner.url(:medium)) %>
+</p>
 <p>
   <strong>Name:</strong>
   <%= @location.name %>
