@@ -97,6 +97,7 @@ describe LocationsController do
           get :show, {:id => location.to_param, format: "json"}
           json["name"].should eq location.name
           json["address"].should eq location.address
+          json["capacity"].should eq location.capacity
           json["photo"].should eq ("http://test.com" + location.photo.url(:medium))
           json["description"].should eq location.description
           json["attendees"].should eq location.attendees.count

@@ -7,5 +7,6 @@ FactoryGirl.define do
     phone "1-101-1011"
     photo_file_name "location.jpeg"
     description "This is a crazy place for a crazy night"
+    capacity 1000
   end
 end
