@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
     @locations = Location.all
     if params['name'].present?
       priority = @locations.where("name like :name or alternative_name like :name", name: "%#{params['name']}%").limit(5)
-      other_results = Location.where('description like :name or address like :name ', name: "%#{params['name']}%").limit(5)
+      other_results = Location.where('description like :name or address like :name ', name: "%#{params['name']}%").limit(10)
       other_results = other_results.reject{ |l| priority.include? l }
 
       @locations = priority.concat(other_results)
