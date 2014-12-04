@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
-  has_attached_file :picture, :styles => { :medium => "200x200>", :thumb => "100x100>" }, :default_url => "/images/user_missing_:style.png"
+  has_attached_file :picture, :styles => { :medium => '320x320#', :thumb => '160x160#' }, :default_url => "/images/user_missing_:style.png"
   has_many :identities, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :user_photos, dependent: :destroy
