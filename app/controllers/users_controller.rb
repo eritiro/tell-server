@@ -26,10 +26,12 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @locations = Location.all
   end
 
   # GET /users/1/edit
   def edit
+    @locations = Location.all
   end
 
   # POST /users
@@ -97,6 +99,6 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:username, :email, :password, :picture, :admin, :gender, :device_token)
+    params.require(:user).permit(:username, :email, :password, :picture, :admin, :gender, :device_token, :birthday, :location_id)
   end
 end

@@ -39,6 +39,11 @@
     <%= f.label :admin %><br>
     <%= f.check_box :admin %>
   </div>
+
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.select :location_id, options_from_collection_for_select(@locations, "id", "name"), include_blank: true %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

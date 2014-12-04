@@ -44,6 +44,11 @@
   <%= @user.completed_tutorial %>
 </p>
 
+<p>
+  <strong>Attending to:</strong>
+  <%= @user.location %>
+</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Messages', user_messages_path(@user) %> |

@@ -25,7 +25,7 @@ describe AttendeesController do
         json.first["id"].should eq user.id
         json.first["username"].should eq user.username
         json.first["gender"].should eq user.gender
-        json.first["picture"].should eq absolute_url(user.picture.url(:medium))
+        json.first["picture"].should eq absolute_url(user.picture.url(:thumb))
       end
     end
   end

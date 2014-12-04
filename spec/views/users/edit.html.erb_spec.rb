@@ -6,6 +6,7 @@ describe "users/edit" do
       :username => "MyString",
       :email => "MyString"
     ))
+    @locations = assign(:locations, build_list(:location, 2))
   end
 
   it "renders the edit user form" do
