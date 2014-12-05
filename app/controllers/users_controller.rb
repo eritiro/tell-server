@@ -77,10 +77,10 @@ class UsersController < ApplicationController
 
   def invite
     @user.notify(
-      from: current_user,
-      text: "#{current_user} te invitó un trago. Reclamaselo esta noche!!",
-      title: "#{current_user} te invitó un trago",
-      type: "invite")
+      from:  current_user,
+      text:  "Te invitó un trago.",
+      title: "#{current_user}",
+      type:  "invite")
 
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully notified.' }

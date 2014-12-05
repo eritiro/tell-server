@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
     @user.notify(
       from: current_user,
       text: @message.text,
-      title: "#{current_user} te envió un mensaje",
+      title: "#{current_user}",
       type: "message")
 
     current_user.notify(
