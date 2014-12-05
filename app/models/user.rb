@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
-  has_attached_file :picture, :styles => { :medium => '320x320#', :thumb => '160x160#' }, :default_url => "/images/user_missing_:style.png"
+  include ApplicationHelper
+
+  has_attached_file :picture, :styles => { medium: '320x320#', thumb: '160x160#', icon: '50x50#' }, :default_url => "/images/user_missing_:style.png"
   has_many :identities, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :user_photos, dependent: :destroy
@@ -30,7 +32,9 @@ class User < ActiveRecord::Base
         title: notification.title,
         message: notification.text,
         type: notification.type,
-        from_id: notification.from_id,
+        from_id:       notification.from.id,
+        from_username: notification.from.username,
+        from_thumb:    absolute_url(notification.from.picture(:icon)),
         read: notification.read,
         msgcnt: notifications.unread.count
       }

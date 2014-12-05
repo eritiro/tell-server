@@ -25,12 +25,16 @@ describe NotificationsController do
 
       it "renders current user messages" do
         notification = create(:notification, to: current_user)
-        get :index, format: :json
+        get :index, { format: :json, api_version: 2 }
 
         json.first["id"].should eq notification.id
+        json.first["title"].should eq notification.title
         json.first["text"].should eq notification.text
         json.first["type"].should eq notification.type
-        json.first["from_id"].should eq notification.from_id
+        json.first["from"]["id"].should eq notification.from.id
+        json.first["from"]["username"].should eq notification.from.username
+        json.first["from"]["thumb"].should eq notification.from.picture(:thumb)
+
         json.first["created_at"].should eq notification.reload.created_at.as_json
         json.first["read"].should eq false
       end
