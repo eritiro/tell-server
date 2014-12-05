@@ -60,9 +60,10 @@ describe UsersController do
       include ApplicationHelper
       let(:json) { JSON.parse(response.body) }
 
-      it "returns the user image" do
+      it "returns the user info" do
         get :show, id: user.to_param, format: :json
         json["picture"].should eq absolute_url(user.picture.url(:medium))
+        json["gender"].should eq user.gender
       end
 
       it "returns they location" do
