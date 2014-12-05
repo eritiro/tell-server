@@ -194,6 +194,13 @@ describe UsersController do
         get :profile, format: :json
         json["attending_location_id"].should eq attending_location.id
       end
+
+      it "returns the location" do
+        location = create(:location)
+        user.update(location_id: location.id)
+        get :profile, format: :json
+        json["location"]["id"].should eq location.id
+      end
     end
   end
 end
