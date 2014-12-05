@@ -18,12 +18,6 @@ describe NotificationsController do
       assigns(:notifications).should_not include notification
     end
 
-    it "marks notifications as read" do
-      notification = create(:notification, to: current_user)
-      get :index
-      notification.reload.read.should be_true
-    end
-
     describe ".json" do
       render_views
       include ApplicationHelper

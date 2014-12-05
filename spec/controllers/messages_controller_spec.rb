@@ -36,6 +36,12 @@ describe MessagesController do
       assigns(:messages).should_not include(message)
     end
 
+    it "marks notification as read" do
+      notification = create(:notification, to: current_user, from: friend, type: 'message')
+      get :index, user_id: friend.to_param
+      notification.reload.read.should be_true
+    end
+
     describe ".json" do
       render_views
       include ApplicationHelper

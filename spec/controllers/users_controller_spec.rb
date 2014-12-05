@@ -50,9 +50,16 @@ describe UsersController do
     let(:user) { create :user }
 
     before { sign_in current_user }
+
     it "assigns the requested user as @user" do
       get :show, {:id => user.to_param}
       assigns(:user).should eq(user)
+    end
+
+    it "marks notification as read" do
+      notification = create(:notification, to: current_user, from: user, type: 'invite')
+      get :show, {:id => user.to_param}
+      notification.reload.read.should be_true
     end
 
     describe ".json" do

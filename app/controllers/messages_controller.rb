@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
   def index
     @messages = scoped_messages
     @message = @user.received_messages.new
+    current_user.notifications.where(from: @user, type: 'message').update_all(read: true)
     respond_with(@messages)
   end
 
