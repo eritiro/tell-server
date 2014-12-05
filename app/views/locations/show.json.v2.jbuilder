@@ -1,0 +1,1 @@
+json.partial! 'locations/show', location: @location

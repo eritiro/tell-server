@@ -34,6 +34,10 @@ module TellServer
 
     config.autoload_paths += %W(#{config.root}/crawlers)
 
+    config.versioncake.supported_version_numbers = (1..2)
+    config.versioncake.extraction_strategy       = [:query_parameter, :http_accept_parameter]
+    config.versioncake.default_version           = 1
+
     config.middleware.insert_after Rails::Rack::Logger, Rack::Cors, :logger => Rails.logger do
       allow do
         origins '*'

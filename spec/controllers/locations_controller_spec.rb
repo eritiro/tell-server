@@ -94,11 +94,10 @@ describe LocationsController do
 
         it "renders json" do
           location = create(:location)
-          get :show, {:id => location.to_param, format: "json"}
+          get :show, {:id => location.to_param, format: "json", api_version: 2 }
           json["name"].should eq location.name
           json["address"].should eq location.address
           json["capacity"].should eq location.capacity
-          json["photo"].should eq ("http://test.com" + location.photo.url(:medium))
           json["description"].should eq location.description
           json["attendees_count"].should eq location.attendees.count
         end
@@ -106,7 +105,7 @@ describe LocationsController do
         it "includes attendees" do
           location = create(:location)
           user = create(:user, location: location)
-          get :show, {:id => location.to_param, format: "json"}
+          get :show, {:id => location.to_param, format: "json", api_version: 2 }
           json["attendees"].first["id"].should eq user.id
         end
       end
