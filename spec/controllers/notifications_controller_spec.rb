@@ -33,7 +33,7 @@ describe NotificationsController do
         json.first["type"].should eq notification.type
         json.first["from"]["id"].should eq notification.from.id
         json.first["from"]["username"].should eq notification.from.username
-        json.first["from"]["thumb"].should eq notification.from.picture(:thumb)
+        json.first["from"]["thumb"].should eq absolute_url(notification.from.picture(:icon))
 
         json.first["created_at"].should eq notification.reload.created_at.as_json
         json.first["read"].should eq false
