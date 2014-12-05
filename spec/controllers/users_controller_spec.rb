@@ -201,6 +201,12 @@ describe UsersController do
         get :profile, format: :json
         json["location"]["id"].should eq location.id
       end
+
+      it "returns notifications" do
+        notification = create :notification, to: user
+        get :profile, format: :json
+        json["notifications"].first["id"].should eq notification.id
+      end
     end
   end
 end

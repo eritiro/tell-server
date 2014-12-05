@@ -100,7 +100,14 @@ describe LocationsController do
           json["capacity"].should eq location.capacity
           json["photo"].should eq ("http://test.com" + location.photo.url(:medium))
           json["description"].should eq location.description
-          json["attendees"].should eq location.attendees.count
+          json["attendees_count"].should eq location.attendees.count
+        end
+
+        it "includes attendees" do
+          location = create(:location)
+          user = create(:user, location: location)
+          get :show, {:id => location.to_param, format: "json"}
+          json["attendees"].first["id"].should eq user.id
         end
       end
     end
