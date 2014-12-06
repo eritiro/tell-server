@@ -1,4 +1,5 @@
-json.extract! @user, :id, :username, :authentication_token
+json.extract! @user, :id, :username, :authentication_token, :gender
+json.picture absolute_url(@user.picture.url(:thumb))
 json.unread_notifications @user.notifications.unread.count
 
 if @user.location
