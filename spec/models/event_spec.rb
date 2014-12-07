@@ -41,5 +41,18 @@ describe Event do
         Event.log_without_user 'landing', '200.10.20.30', 'agent'
       }.to change{ Event.count }.by(1)
     end
+
+    it "avoids Googlebot agent" do
+      expect {
+        Event.log_without_user 'landing', '200.10.20.30', 'Googlebot'
+      }.to change{ Event.count }.by(0)
+    end
+
+    it "avoids duplicate ip" do
+      expect {
+        Event.log_without_user 'landing', '200.10.20.30', 'agent'
+        Event.log_without_user 'landing', '200.10.20.30', 'agent'
+      }.to change{ Event.count }.by(1)
+    end
   end
 end

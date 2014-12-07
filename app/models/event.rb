@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.log_without_user event_type, ip, user_agent
-    create! event_type: event_type, ip: ip, user_agent: user_agent
+    return if user_agent.include? 'Googlebot'
+    find_or_create_by! event_type: event_type, ip: ip, user_agent: user_agent
   end
 end
