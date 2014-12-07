@@ -238,6 +238,11 @@ describe UsersController do
       post :alert
     end
 
+    it "does not create a notification" do
+      user = create(:user, device_token: 'any_token')
+      expect{ post :alert }.to change(Notification, :count).by(0)
+    end
+
     it "avoids users that ara attending a location" do
       GCM.should_receive(:send_notification).never
       location = create(:location)
