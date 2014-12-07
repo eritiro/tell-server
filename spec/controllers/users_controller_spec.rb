@@ -216,4 +216,45 @@ describe UsersController do
       end
     end
   end
+
+  describe "PUT leave" do
+    it "reset the attending status of all users" do
+      location = create(:location)
+      user = create(:user, location: location)
+      put :leave
+      user.reload.location.should be_nil
+    end
+
+    it "should redirect to index" do
+      put :leave
+      response.should redirect_to(users_path)
+    end
+  end
+
+  describe "POST alert" do
+    it "sends a push notification to each user" do
+      GCM.should_receive(:send_notification).once
+      user = create(:user, device_token: 'any_token')
+      post :alert
+    end
+
+    it "avoids users that ara attending a location" do
+      GCM.should_receive(:send_notification).never
+      location = create(:location)
+      user = create(:user, device_token: 'any_token', location: location)
+      post :alert
+    end
+
+    it "avoids users without device_token" do
+      GCM.should_receive(:send_notification).never
+      location = create(:location)
+      user = create(:user)
+      post :alert
+    end
+
+    it "should redirect to index" do
+      post :alert
+      response.should redirect_to(users_path)
+    end
+  end
 end

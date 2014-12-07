@@ -13,6 +13,10 @@ TellServer::Application.routes.draw do
 
   resources :users, except: [:new, :create] do
     resources :messages, except: [:new]
+    collection do
+      post :alert
+      put :leave
+    end
     member do
       post :invite
     end

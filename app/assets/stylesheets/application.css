@@ -66,3 +66,7 @@ tr[admin=true] .id{
   font-weight: bold;
   color: blue;
 }
+
+.collection-actions form{
+  display: inline-block;
+}

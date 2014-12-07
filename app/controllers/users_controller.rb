@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersHelper
+
   load_and_authorize_resource
   before_action :set_user, only: [:show, :edit, :update, :destroy, :invite]
 
@@ -90,6 +92,19 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
+  end
+
+  def alert
+    User.where(location_id: nil).find_each do |user|
+      send_system_notification user, "Warmapp", "#{user.username}! A donde salis esta noche?"
+    end
+    redirect_to users_path
+  end
+
+  def leave
+    User.update_all(location_id: nil)
+    @locations = Location.all
+    redirect_to users_path
   end
 
 private

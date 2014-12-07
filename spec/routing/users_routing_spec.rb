@@ -30,5 +30,13 @@ describe UsersController do
     it "routes to #profile" do
       get("/users/profile").should route_to("users#profile")
     end
+
+    it "routes to #privacy" do
+      post("/users/alert").should route_to("users#alert")
+    end
+
+    it "routes to #privacy" do
+      put("/users/leave").should route_to("users#leave")
+    end
   end
 end
