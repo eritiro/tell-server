@@ -70,6 +70,7 @@ describe UsersController do
       it "returns the user info" do
         get :show, id: user.to_param, format: :json
         json["picture"].should eq absolute_url(user.picture.url(:medium))
+        json["icon"].should eq absolute_url(user.picture.url(:icon))
         json["gender"].should eq user.gender
       end
 
