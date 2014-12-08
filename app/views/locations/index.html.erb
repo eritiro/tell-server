@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Address</th>
+      <th>Description</th>
       <th>Relevance</th>
       <th>Photo</th>
       <th></th>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= location.name %></td>
         <td><%= location.address %></td>
+        <td><%= location.description %></td>
         <td><%= location.relevance %></td>
         <td><%= image_tag(location.photo.url(:thumb)) %></td>
         <td><%= link_to 'Show', location %></td>
