@@ -32,6 +32,12 @@ describe SocialController do
         assigns(:user).should be_a(User)
       end
 
+      it "assigns feeds" do
+        feed = create :feed
+        put :facebook, {format: :json, token: "abc"}
+        assigns(:feeds).should include(feed)
+      end
+
       describe ".json" do
         render_views
         let(:json) { JSON.parse(response.body) }

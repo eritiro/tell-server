@@ -14,7 +14,7 @@ class SocialController < ApplicationController
 
     @me['device_token'] = params[:device_token]
     @user = find_or_create_user(@me, @photos, @profile_picture)
-
+    @feeds = Feed.all
     render "users/profile"
   rescue Koala::Facebook::AuthenticationError
     access_denied
