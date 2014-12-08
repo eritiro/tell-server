@@ -43,8 +43,7 @@ private
           email: email,
           gender:  me["gender"],
 #          birthday: Date.strptime(me["birthday"], "%m/%d/%Y"),
-          password: Devise.friendly_token[0,20],
-          device_token:  me["device_token"]
+          password: Devise.friendly_token[0,20]
         )
         Event.log 'registration', user
       end
@@ -57,6 +56,7 @@ private
     #create or update pictures
     user.picture = URI.parse(profile_picture) if profile_picture.present?
     user.user_photos << photos.map { |photo| UserPhoto.new(url: photo["source"]) }
+    user.device_token = me["device_token"]
     user.save!
     user
   end

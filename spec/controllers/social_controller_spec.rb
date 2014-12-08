@@ -90,7 +90,8 @@ describe SocialController do
         "email" => "pomelo@gmail.com",
         "first_name" => "pomelo",
         "gender" => "male",
-        "birthday" => "08/04/1985"
+        "birthday" => "08/04/1985",
+        "device_token" => "1234"
       }
 
       @photos = [{ 'source' => 'http://www.totpi.com/wp-content/uploads/2014/03/020212340.jpg'}]
@@ -111,6 +112,7 @@ describe SocialController do
         user = subject.send(:find_or_create_user, @me, @photos, @profile_pic)
         user.email.should eq(@me['email'])
         user.username.should eq(@me['first_name'])
+        user.device_token.should eq(@me['device_token'])
         user.identities.first.uid.should eq(@me['id'])
         user.identities.first.provider.should eq('facebook')
       end
