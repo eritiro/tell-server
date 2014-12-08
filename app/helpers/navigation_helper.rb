@@ -5,6 +5,7 @@ module NavigationHelper
     items = Array.new
 
     add_item items, :metric, Event
+    add_item items, :feed
     add_item items, :location
     add_item items, :user
     add_item items, :version

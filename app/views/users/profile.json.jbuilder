@@ -12,5 +12,9 @@ json.notifications do
   json.partial! 'notifications/index', notifications: @user.notifications
 end
 
+json.feeds do
+  json.partial! 'feeds/index', feeds: @feeds
+end
+
 # deprecated:
 json.attending_location_id @user.location_id

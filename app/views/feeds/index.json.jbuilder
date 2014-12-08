@@ -1,0 +1,1 @@
+json.partial! 'feeds/index', feeds: @feeds

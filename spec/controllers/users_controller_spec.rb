@@ -214,6 +214,12 @@ describe UsersController do
         get :profile, format: :json
         json["notifications"].first["id"].should eq notification.id
       end
+
+      it "returns feeds" do
+        feed = create :feed
+        get :profile, format: :json
+        json["feeds"].first["id"].should eq feed.id
+      end
     end
   end
 

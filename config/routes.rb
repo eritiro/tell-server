@@ -1,4 +1,6 @@
 TellServer::Application.routes.draw do
+  resources :feeds
+
   root to: 'pages#index'
   get '/download', to: 'pages#download'
   get '/app',      to: 'pages#download'

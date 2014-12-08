@@ -92,6 +92,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
+    @feeds = Feed.all
   end
 
   def alert
