@@ -14,8 +14,8 @@ describe "feeds/new" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form[action=?][method=?]", feeds_path, "post" do
-      assert_select "input#feed_title[name=?]", "feed[title]"
-      assert_select "input#feed_detail[name=?]", "feed[detail]"
+      assert_select "textarea#feed_title[name=?]", "feed[title]"
+      assert_select "textarea#feed_detail[name=?]", "feed[detail]"
       assert_select "input#feed_action[name=?]", "feed[action]"
       assert_select "select#feed_type[name=?]", "feed[type]"
     end
