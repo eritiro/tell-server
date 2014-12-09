@@ -25,12 +25,13 @@
   </div>
   <div class="field">
     <%= f.label :type %><br>
-    <%= f.select(:type, options_for_select(['message', 'users'])) %>
+    <%= f.select(:type, options_for_select(['message', 'users'], @feed.type)) %>
   </div>
-  <div>
+  <div class="users field">
     <%= f.label :users %><br>
     <%=collection_check_boxes(:feed, :user_ids, User.all, :id, :username)%>
   </div>
+  <div>Count: <em id="counter"></em></div>
   <div class="actions">
     <%= f.submit %>
   </div>

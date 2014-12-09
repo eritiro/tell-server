@@ -15,3 +15,12 @@
 //= require bootstrap.min
 //= require turbolinks
 //= require_tree .
+
+function updateCounter(){
+  $("#counter").text($('.users input:checked').length);
+};
+
+$().ready(function(){
+  $('.field.users input').click(updateCounter);
+  updateCounter();
+});
