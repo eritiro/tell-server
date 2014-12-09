@@ -25,5 +25,9 @@ class MetricsController < ApplicationController
       end
       @events << { key: event_type, values: values }
     end
+
+    @users_count = User.all.count
+    @male_count = User.male.count
+    @female_count = User.female.count
   end
 end

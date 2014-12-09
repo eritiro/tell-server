@@ -35,3 +35,22 @@
     <% end %>
   </tbody>
 </table>
+<br/>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Number of Users </th>
+      <th><%= @users_count %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Male</td>
+      <td><%= @male_count * 100 / @users_count %>%</td>
+    </tr>
+    <tr>
+      <td>Female</td>
+      <td><%= @female_count * 100 / @users_count %>%</td>
+    </tr>
+  </tbody>
+</table>

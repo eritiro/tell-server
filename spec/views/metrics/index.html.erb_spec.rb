@@ -4,6 +4,9 @@ describe "metrics/index" do
   before(:each) do
     @versions = build_list(:version, 2, id: 1, created_at: Time.now)
     assign(:versions, @versions)
+    assign(:users_count, 5)
+    assign(:male_count, 2)
+    assign(:female_count, 3)
   end
 
   context "with some events" do
@@ -16,13 +19,13 @@ describe "metrics/index" do
 
     it "renders a column per versions" do
       render
-      assert_select "tr>th", count: 1 + @versions.count
+      assert_select ".metrics tr>th", count: 1 + @versions.count
     end
 
     it "renders a list of event_types" do
       render
-      assert_select "tr>td", text: "registration"
-      assert_select "tr>td", text: "100%", count: 2
+      assert_select ".metrics tr>td", text: "registration"
+      assert_select ".metrics tr>td", text: "100%", count: 2
     end
   end
 
@@ -36,8 +39,8 @@ describe "metrics/index" do
 
     it "renders a list of event_types" do
       render
-      assert_select "tr>td", text: "registration"
-      assert_select "tr>td", text: "-", count: 4
+      assert_select ".metrics tr>td", text: "registration"
+      assert_select ".metrics tr>td", text: "-", count: 4
     end
   end
 end
