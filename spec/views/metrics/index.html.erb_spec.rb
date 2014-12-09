@@ -9,8 +9,8 @@ describe "metrics/index" do
   context "with some events" do
     before do
       @events = [
-        { key: :registration, values: [100, 100] },
-        { key: :scan, values: [50, 50] }]
+        { key: :registration, values: [{accumulated: 100, compared: nil}, {accumulated: 100, compared: nil}] },
+        { key: :scan, values: [{accumulated: 50, compared: 50}, {accumulated: 50, compared: 50}] }]
       assign(:events, @events)
     end
 
@@ -23,15 +23,14 @@ describe "metrics/index" do
       render
       assert_select "tr>td", text: "registration"
       assert_select "tr>td", text: "100%", count: 2
-      assert_select "tr>td", text: "50%", count: 2
     end
   end
 
   context "with no users for versions" do
     before do
       @events = [
-        { key: :registration, values: [nil, nil] },
-        { key: :scan, values: [nil, nil] }]
+        { key: :registration, values: [{accumulated: nil, compared: nil}, {accumulated: nil, compared: nil}] },
+        { key: :scan, values: [{accumulated: nil, compared: nil}, {accumulated: nil, compared: nil}] }]
       assign(:events, @events)
     end
 

@@ -1,6 +1,6 @@
 <h1>Metrics</h1>
 
-<table class="table">
+<table class="table metrics">
   <thead>
     <tr>
       <th>Action</th>
@@ -10,7 +10,8 @@
           <br/>
           <small><%= version.created_at.to_date %></small><br/>
           <small>
-            impresions: <%= version.number_of_users %>
+            <%= version.has_landing ? "impresions" : "users" %>:
+            <%= version.number_of_users %>
             days online: <%= version.days_online %>
           </small>
         </th>
@@ -23,7 +24,12 @@
       <tr>
         <td><%= event_type[:key] %></td>
         <% event_type[:values].each do |value| %>
-          <td><%= value.present? ? "#{value}%" : "-" %></td>
+          <td>
+            <%= value[:accumulated].present? ? "#{value[:accumulated]}%" : "-" %>
+            <% if value[:compared].present? %>
+              <em>(-<%= number_to_percentage(value[:compared], precision: 0) %>)</em>
+            <% end%>
+          </td>
         <% end %>
       </tr>
     <% end %>

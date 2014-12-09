@@ -70,3 +70,7 @@ tr[admin=true] .id{
 .collection-actions form{
   display: inline-block;
 }
+
+.table.metrics em{
+  color: red;
+}

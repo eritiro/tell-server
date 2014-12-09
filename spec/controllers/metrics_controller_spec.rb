@@ -19,13 +19,16 @@ describe MetricsController do
       it "counts TYPES" do
         create :version
 
-        create_list :event, 4, :landing
-        create_list :event, 3, :registration
-        create_list :event, 2, :attend
-        create_list :event, 1, :chat
+        create_list :event, 8, :landing
+        create_list :event, 6, :registration
+        create_list :event, 3, :attend
 
         get :index, {}
-        assigns(:events).map{|event| event[:values] }.should eq [[100], [75], [50], [25]]
+        assigns(:events).map{|event| event[:values] }.should eq [
+          [{accumulated: 100, compared: nil}],
+          [{accumulated: 75, compared: 25}],
+          [{accumulated: 37, compared: 50}],
+          [{accumulated: 0, compared: 100}]]
       end
     end
   end
