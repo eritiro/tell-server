@@ -14,8 +14,20 @@ class Version < ActiveRecord::Base
     end
   end
 
+  def events_for event_type
+    if event_type == 'landing'
+      events_without_user.where(event_type: 'landing')
+    else
+      events.where(event_type: event_type)
+    end
+  end
+
   def number_of_users
-    events_without_user.landing.count
+    if has_landing
+      events_without_user.landing.count
+    else
+      events.registration.count
+    end
   end
 
   def days_online
