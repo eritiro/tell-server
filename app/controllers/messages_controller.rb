@@ -53,7 +53,7 @@ class MessagesController < ApplicationController
 
 private
   def scoped_messages
-    Message.where("(from_id = ? and to_id = ?) or (from_id = ? and to_id = ?)",
+    Message.where("(from_id = ? and to_id = ? and not from_deleted) or (from_id = ? and to_id = ? and not to_deleted)",
       current_user, @user,
       @user, current_user)
   end

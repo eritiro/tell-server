@@ -49,6 +49,37 @@ describe NotificationsController do
       }.to change(Notification, :count).by(-1)
     end
 
+    it "hides the related messages to the user" do
+      friend = create :user
+      notification = create :notification, to: current_user, from: friend, type: 'message'
+      from_message = create :message, from: current_user, to: friend
+      to_message = create :message, from: friend, to: current_user
+
+      delete :destroy, {:id => notification.to_param }
+      from_message.reload
+      to_message.reload
+
+      from_message.from_deleted.should be_true
+      from_message.to_deleted.should   be_false
+      to_message.from_deleted.should   be_false
+      to_message.to_deleted.should     be_true
+    end
+
+    it "does not hide message for others" do
+      notification = create :notification, to: current_user, type: 'message'
+      from_message = create :message, from: current_user
+      to_message = create :message, to: current_user
+
+      delete :destroy, {:id => notification.to_param }
+      from_message.reload
+      to_message.reload
+
+      from_message.from_deleted.should be_false
+      from_message.to_deleted.should   be_false
+      to_message.from_deleted.should   be_false
+      to_message.to_deleted.should     be_false
+    end
+
     context "of other user" do
       it "does not destroy the notification" do
         notification = create :notification

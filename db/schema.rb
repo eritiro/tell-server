@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209001657) do
+ActiveRecord::Schema.define(version: 20141211022522) do
 
   create_table "events", force: true do |t|
     t.string   "event_type"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20141209001657) do
     t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "from_deleted", default: false
+    t.boolean  "to_deleted",   default: false
   end
 
   add_index "messages", ["from_id"], name: "index_messages_on_from_id", using: :btree

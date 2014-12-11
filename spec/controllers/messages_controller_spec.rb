@@ -36,6 +36,22 @@ describe MessagesController do
       assigns(:messages).should_not include(message)
     end
 
+    it "does not include user deleted messages" do
+      from = create :message, from: current_user, to: friend, from_deleted: true
+      to   = create :message, from: friend, to: current_user, to_deleted: true
+      get :index, user_id: friend.to_param
+      assigns(:messages).should_not include(from)
+      assigns(:messages).should_not include(to)
+    end
+
+    it "includes friend deleted messages" do
+      from = create :message, from: current_user, to: friend, to_deleted: true
+      to   = create :message, from: friend, to: current_user, from_deleted: true
+      get :index, user_id: friend.to_param
+      assigns(:messages).should include(from)
+      assigns(:messages).should include(to)
+    end
+
     it "marks notification as read" do
       notification = create(:notification, to: current_user, from: friend, type: 'message')
       get :index, user_id: friend.to_param
