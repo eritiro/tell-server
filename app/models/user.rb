@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates_inclusion_of :gender, in: ['male', 'female']
 
+  scope :real, -> { where(fake: false) }
   scope :male, -> { where(gender: 'male') }
   scope :female, -> { where(gender: 'female') }
 

@@ -26,8 +26,15 @@ class MetricsController < ApplicationController
       @events << { key: event_type, values: values }
     end
 
-    @users_count = User.all.count
-    @male_count = User.male.count
-    @female_count = User.female.count
+    @users_count = User.real.count
+    @male_count = User.real.male.count
+    @female_count = User.real.female.count
+
+    @locations = Location.select("locations.id, locations.name, count(users.id) as attendees_count").
+      joins(:attendees).
+      group("locations.id, locations.name").
+      where("users.fake = false").
+      order("attendees_count DESC").
+      limit(10)
   end
 end

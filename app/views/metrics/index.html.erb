@@ -35,7 +35,9 @@
     <% end %>
   </tbody>
 </table>
+
 <br/>
+
 <table class="table">
   <thead>
     <tr>
@@ -52,5 +54,24 @@
       <td>Female</td>
       <td><%= @female_count * 100 / @users_count %>%</td>
     </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Popular locations </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.name %></td>
+        <td><%= location.attendees.real.count %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

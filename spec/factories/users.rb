@@ -9,6 +9,11 @@ FactoryGirl.define do
 
     factory :admin do
       admin true
+      fake true
+    end
+
+    trait :fake do
+      fake true
     end
   end
 end
