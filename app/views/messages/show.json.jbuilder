@@ -1,1 +1,4 @@
-json.extract! @message, :id, :from_id, :to_id, :text, :created_at, :updated_at
+json.partial! 'messages/show', message: @message
+json.notification do
+  json.partial! 'notifications/show', notification: @notification
+end

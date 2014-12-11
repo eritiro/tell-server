@@ -40,4 +40,30 @@ describe NotificationsController do
       end
     end
   end
+
+  describe "DELETE destroy" do
+    it "destroys the requested notification" do
+      notification = create :notification, to: current_user
+      expect {
+        delete :destroy, {:id => notification.to_param }
+      }.to change(Notification, :count).by(-1)
+    end
+
+    context "of other user" do
+      it "does not destroy the notification" do
+        notification = create :notification
+        expect {
+          expect {
+            delete :destroy, {:id => notification.to_param }
+          }.to raise_error
+        }.to change(Notification, :count).by(0)
+      end
+    end
+
+    it "redirects to the messages list" do
+      notification = create :notification, to: current_user
+      delete :destroy, {:id => notification.to_param }
+      response.should redirect_to(notifications_url)
+    end
+  end
 end

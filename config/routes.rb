@@ -33,6 +33,6 @@ TellServer::Application.routes.draw do
   get 'metrics', to: 'metrics#index'
 
 
-  resources :notifications, only: :index
+  resources :notifications, only: [:index, :destroy]
 
 end

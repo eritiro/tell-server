@@ -135,10 +135,24 @@ describe MessagesController do
       response.should redirect_to(user_messages_url(friend))
     end
 
+    it "assigns the message as @message" do
+      post :create, {:message => attributes_for(:message), user_id: friend.to_param}
+      assigns(:message).should be_present
+    end
+
+    it "assigns the message as @message" do
+      post :create, {:message => attributes_for(:message), user_id: friend.to_param}
+      assigns(:notification).should be_present
+    end
+
     describe ".json" do
-      it "shows no content" do
-        post :create, {:message => attributes_for(:message), user_id: friend.to_param, format: :json }
-        response.status.should eq 204
+      render_views
+      include ApplicationHelper
+      let(:json) { JSON.parse(response.body) }
+
+      it "returns the notification" do
+        post :create, {:message => attributes_for(:message), user_id: friend.to_param, format: :json}
+        json["notification"]["id"].should be_present
       end
     end
   end

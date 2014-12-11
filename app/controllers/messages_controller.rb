@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
       title: "#{current_user}",
       type: "message")
 
-    current_user.notify(
+    @notification = current_user.notify(
       from: @user,
       text: @message.text,
       type: "message",
@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to user_messages_path(@user) }
-      format.json { head :no_content }
+      format.json { render 'messages/show' }
     end
   end
 

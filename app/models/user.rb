@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
         msgcnt: notifications.unread.count
       }
     end
+    notification
   end
 
 private
