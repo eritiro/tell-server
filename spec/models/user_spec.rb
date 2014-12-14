@@ -14,10 +14,11 @@ describe User do
   end
 
   describe "gender" do
-    it "should be male or female" do
+    it "should be male, female or blank" do
       build(:user, gender: 'male').should be_valid
       build(:user, gender: 'female').should be_valid
       build(:user, gender: 'other').should_not be_valid
+      build(:user, gender: '').should be_valid
     end
   end
 
