@@ -7,6 +7,7 @@ describe "metrics/index" do
     assign(:users_count, 5)
     assign(:male_count, 2)
     assign(:female_count, 3)
+    assign(:locations, build_list(:location, 2))
   end
 
   context "with some events" do
