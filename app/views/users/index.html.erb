@@ -37,6 +37,7 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @users if @users.respond_to?(:total_pages) %>
 <div class="collection-actions">
   <%= button_to 'Leave',  { action: 'leave' }, { method: 'put',  data: { confirm:'All the users will leave they place' }, class: 'btn btn-primary pull-right' } %>
   <%= button_to 'Alert',  { action: 'alert' }, { method: 'post', data: { confirm:'All the users will receive a push notification' }, class: 'btn btn-primary pull-right' } %>

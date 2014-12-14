@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if params[:version_id].present?
       @users = Version.find(params[:version_id]).events.registration.map(&:user)
     else
-      @users = User.all
+      @users = User.paginate(:page => params[:page])
     end
     @versions = Version.all
 
