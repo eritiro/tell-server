@@ -47,8 +47,15 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message.destroy
-    respond_with([@user, @message])
+    if @message.from == current_user
+      @message.update(from_deleted: true)
+    else
+      @message.update(to_deleted: true)
+    end
+    respond_to do |format|
+      format.html { redirect_to user_messages_path(@user) }
+      format.json { head :no_content }
+    end
   end
 
 private

@@ -198,17 +198,30 @@ describe MessagesController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested message" do
+    it "marks own message as from_deleted" do
       message = create :message, from: current_user, to: friend
-      expect {
-        delete :destroy, {:id => message.to_param, user_id: friend.to_param}
-      }.to change(Message, :count).by(-1)
+      delete :destroy, {:id => message.to_param, user_id: friend.to_param}
+      message.reload.from_deleted.should be_true
+      message.reload.to_deleted.should   be_false
+    end
+
+    it "marks message from others as to_deleted" do
+      message = create :message, from: friend, to: current_user
+      delete :destroy, {:id => message.to_param, user_id: friend.to_param}
+      message.reload.from_deleted.should be_false
+      message.reload.to_deleted.should   be_true
     end
 
     it "redirects to the messages list" do
       message = create :message, from: current_user, to: friend
       delete :destroy, {:id => message.to_param, user_id: friend.to_param}
       response.should redirect_to(user_messages_url(friend))
+    end
+
+    it "JSON shows no content" do
+      message = create :message, from: current_user, to: friend
+      delete :destroy, {:id => message.to_param, user_id: friend.to_param, format: :json}
+      response.status.should eq 204
     end
   end
 
