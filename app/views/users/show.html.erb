@@ -34,6 +34,13 @@
   <%= @user.fake %>
 </p>
 
+<% if @user.identities.any? %>
+  <p>
+    <strong>Profile:</strong>
+    <%= link_to 'link', 'http://facebook.com/' + @user.identities.first.uid, target: '_blank' %>
+  </p>
+<% end %>
+
 <p>
   <strong>Events:</strong>
   <ul>
