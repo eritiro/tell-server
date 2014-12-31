@@ -6,6 +6,8 @@
   <%= submit_tag "Export", class: 'btn btn-secondary pull-right' %>
   <%= submit_tag "Search", class: 'btn btn-primary pull-right' %>
 <% end %>
+
+<%= will_paginate @users if @users.respond_to?(:total_pages) %>
 <table class="table">
   <thead>
     <tr>
